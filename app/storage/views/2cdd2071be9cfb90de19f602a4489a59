@@ -1,0 +1,83 @@
+
+
+<?php $__env->startSection('content'); ?>
+<div class="container">
+	<div class="row">
+	<?php if(!count($users)): ?>
+		<div class="text-center"><h2>No results found!</h2></div>
+	<?php else: ?>
+		<?php if($table): ?>
+		<div class="col-md-12">
+		    <div class="table-responsive">
+		        <table class="table">
+		          	<thead>
+					    <tr>
+			                <th>Name</th>
+			                <th>IP Address</th>
+			                <th>Reason</th>
+			                <th>Banned by</th>
+			                <th>Date</th>
+			                <th>Expires on</th>
+					    </tr>
+				    </thead>
+
+				    <tbody>
+		           	<?php foreach($users as $user): ?>
+		                <tr>		            
+	                        <td><?php echo ucfirst($user->NAME); ?></td>
+	                        <td><?php echo $user->IP; ?></td>
+	                        <td><?php echo $user->REASON; ?></td>
+	                        <td><?php echo $user->BANBY; ?></td>
+	                        <td><?php echo date("jS \of F Y", $user->DATE); ?></td>
+	                        <td><?php echo $user->EXPIRE ? date("jS \of F Y", $user->EXPIRE) : ("Never"); ?></td>
+		                </tr>
+		         	<?php endforeach; ?>
+				    </tbody>
+			    </table>
+		    </div>
+		</div>
+
+		<?php else: ?>
+		<div class="col-md-12">
+		    <div class="table-responsive">
+		        <table class="table">
+		          	<thead>
+					    <tr>
+	                        <th>Name</th>
+	                        <th>Registered IP Address</th>
+	                        <th>Recent IP Address</th>
+	                        <th>Score</th>
+	                        <th>On-Hand Money</th>
+	                        <th>Bank Money</th>
+	                        <th>XP</th>
+	                        <th>Current Bounty</th>
+	                        <th>Admin level</th>
+					    </tr>
+				    </thead>
+
+				    <tbody>
+		           	<?php foreach($users as $user): ?>
+		                <tr>
+		                    <td><?php echo ucfirst($user->NAME); ?></td>
+		                    <td><?php echo $user->ADMINLEVEL >= 5 ? ("Private") : $user->IP; ?></td>
+		                    <td><?php echo $user->ADMINLEVEL >= 5 ? ("Private") : $user->LAST_IP; ?></td>
+		                    <td><?php echo $user->SCORE; ?></td>
+		                    <td><?php echo $user->CASH; ?></td>
+		                    <td><?php echo $user->BANKMONEY; ?></td>
+		                    <td><?php echo $user->XP; ?></td>
+		                    <td><?php echo $user->BOUNTY; ?></td>
+		                    <td><?php echo $user->ADMINLEVEL; ?></td>
+		                </tr>
+		         	<?php endforeach; ?>
+				    </tbody>
+			    </table>
+		    </div>
+		</div>
+		<?php endif; ?>
+	<?php endif; ?>
+		<div class="text-center" style="margin-top:50px;"><a href="<?php echo URL::to('/admin/search'); ?>" class="btn btn-lg btn-inverse">Return Back?</a></div>
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

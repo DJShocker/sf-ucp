@@ -1,0 +1,57 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=name">Name</a></th>
+                            <th><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=score">Score</a></th>
+                            <th><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=kills">Kills</a></th>
+                            <th><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=deaths">Deaths</a></th>
+                            <th class="hidden-xs"><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=arrests">Arrests</a></th>
+                            <th class="hidden-xs"><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=robbery">Robberies</a></th>
+                            <th class="hidden-xs hidden-sm"><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=fires">Fires Extinguished</a></th>
+                            <th class="hidden-xs hidden-sm"><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=hits">Hits Completed</a></th>
+                            <th class="hidden-xs hidden-sm"><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=burglaries">Burglaries</a></th>
+                            <th class="hidden-xs hidden-sm"><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=blownjails">Blown Jails</a></th>
+                            <th class="hidden-xs hidden-sm"><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=blownbank">Blown Vault</a></th>
+                            <th class="hidden-xs hidden-sm"><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=vehjacked">Vehicles Jacked</a></th>
+                            <th class="hidden-xs hidden-sm"><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=meth">Meth Yielded</a></th>
+                            <th class="hidden-xs hidden-sm"><a href="highscores?page=<?php echo $players->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=truck">Total Trucked Cargo</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php foreach($players as $user): ?>
+                                <tr>
+                                    <td><?php echo ucfirst($user->NAME); ?></td>
+                                    <td><?php echo $user->SCORE; ?></td>
+                                    <td><?php echo $user->KILLS; ?></td>
+                                    <td><?php echo $user->DEATHS; ?></td>
+                                    <td class="hidden-xs"><?php echo $user->ARRESTS; ?></td>
+                                    <td class="hidden-xs"><?php echo $user->ROBBERIES; ?></td>
+                                    <td class="hidden-xs hidden-sm"><?php echo $user->FIRES; ?></td>
+                                    <td class="hidden-xs hidden-sm"><?php echo $user->CONTRACTS; ?></td>
+                                    <td class="hidden-xs hidden-sm"><?php echo $user->BURGLARIES; ?></td>
+                                    <td class="hidden-xs hidden-sm"><?php echo $user->BLEW_JAILS; ?></td>
+                                    <td class="hidden-xs hidden-sm"><?php echo $user->BLEW_VAULT; ?></td>
+                                    <td class="hidden-xs hidden-sm"><?php echo $user->VEHICLES_JACKED; ?></td>
+                                    <td class="hidden-xs hidden-sm"><?php echo $user->METH_YIELDED; ?></td>
+                                    <td class="hidden-xs hidden-sm"><?php echo $user->TRUCKED; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div align="center"><?php echo $players->appends(array('sort' => ($sort == "desc") ? "asc" : "desc", 'field' => strtolower($field) ))->links(); ?></div>
+        </div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('jscontent'); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

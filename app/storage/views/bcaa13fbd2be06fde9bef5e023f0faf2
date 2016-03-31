@@ -1,0 +1,51 @@
+<?php $__env->startSection('content'); ?>    
+<div class="container">
+
+      <?php echo Form::open(['url' => '/help/create', 'method' => 'POST']); ?>
+
+		<div class="row">
+	   		<div class="col-md-6">
+	   			<?php echo Form::text('subject', '', array('class' => 'form-control', 'placeholder' => 'Enter Subject/Title Here')); ?>
+
+	   		</div>
+
+	   		<br class="hidden-md hidden-lg" />
+
+	   		<div class="col-md-6">
+		        <select name="category" class="form-control">
+		            <option value="">Choose A Category</option>
+		            <option value="0">Server Information</option>
+		            <option value="1">Help</option>
+		            <option value="2">FAQ</option>
+		            <option value="3">Guides</option>
+		            <option value="4">Tips n' Tricks</option>
+		        </select>
+	        </div>
+	   	</div>
+
+	   	<br/>
+
+	   	<div class="row">
+	       	<div class="col-md-12">
+	    		<?php echo Form::textarea('content', '', array('class' => 'ckeditor')); ?>
+
+    		</div> 		
+	   	</div>
+
+	   	<br/>
+
+	   	<div class="row">
+	   		<div class="col-md-12">	   		
+	        	<div class="text-center"><?php echo Form::submit('Submit Thread', array( 'class' => 'btn btn-lg btn-success')); ?></div>
+	   		</div>
+	   	</div>
+      <?php echo Form::close(); ?>
+
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('jscontent'); ?>
+<script type='text/javascript' src='<?php echo URL::to('/'); ?>/assets/plugins/form-ckeditor/ckeditor.js'></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,40 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-4 col-md-4">
+            <?php echo Form::open(array('route' => 'admin.transactions', 'method' => 'POST')); ?>
+
+            	<h3>Search Transaction Log</h3>
+
+				<div class="form-group">
+					<?php echo Form::label('searchType', 'Search Type', array('class' => 'control-label')); ?>
+
+	            	<?php echo Form::select('searchType', ['Money', 'Irresistible Coins'], 0, array('class' => 'form-control')); ?>
+
+	            </div>
+
+				<div class="form-group">
+					<?php echo Form::label('name', 'To Username', array('class' => 'control-label')); ?>
+
+	            	<?php echo Form::text('name', '', array('class' => 'form-control')); ?>
+
+	            </div>
+
+				<div class="form-group">
+					<?php echo Form::label('name', 'From Username', array('class' => 'control-label')); ?>
+
+	            	<?php echo Form::text('name', '', array('class' => 'form-control')); ?>
+
+	            </div>
+
+	            <div align="center">
+		         	<p><?php echo Form::submit('Search Logs', array('class' => 'btn btn-success')); ?></p>
+	            </div>
+            <?php echo Form::close(); ?>
+
+		</div>
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

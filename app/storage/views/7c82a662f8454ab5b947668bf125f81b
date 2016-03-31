@@ -1,0 +1,68 @@
+
+
+<?php $__env->startSection('content'); ?>    
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="panel panel-green">
+				<div class="panel-heading">
+					<h4>Did you know?</h4>
+				</div>
+				<div class="panel-body">
+					<p>You can view all these topics and threads in-game by the command <strong>/help</strong>.</p>
+					<p>Admins (level 3+) are able to write threads, to help you all if need be.</p>
+				</div>
+			</div>
+
+			<?php if($currentUser->ADMINLEVEL > 3): ?>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h4><i class="fa fa-book"></i> Create a new thread?</h4>
+				</div>
+				<div class="panel-body">
+                    <p>Ensure no obscene/vulgar content is written and all is typed flawlessly, as what you type is featured in-game.</p>
+                    <p>Only plain text can be used, meaning no media or any HTML code. In addition, to colour, you may use {RRGGBB} for colouring (hex colour codes).</p>
+                    <div align="center"><a href="help/write" class="btn btn-primary">Get Started <i class="m-icon-swapright m-icon"></i></a></div>
+				</div>
+			</div>
+			<?php endif; ?>
+		</div>
+		<div class="col-md-9">
+			<div class="panel-group" id="accordion">
+	      		<?php if(!$helpTopics->isEmpty()): ?>
+					<?php foreach($helpTopics as $key): ?>
+					<div class="panel panel-grey">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse_<?php echo $key->ID; ?>">
+							<div class="panel-heading">
+								<h4><?php echo $key->SUBJECT; ?></h4>
+								<div class="pull-right hidden-xs hidden-sm"><?php echo Gliee\Irresistible\Utils::helpTopicColor($key->CATEGORY); ?></div>
+							</div>
+						</a>
+						<div id="collapse_<?php echo $key->ID; ?>" class="panel-collapse collapse">
+							<div class="panel-body">
+								<?php echo $key->CONTENT; ?>
+
+								<?php if($key->USER_ID == $currentUser->ID OR $currentUser->ADMINLEVEL > 4): ?>                       
+								<?php echo Form::open(array('url' => '/help/destroy', 'method' => 'POST')); ?>
+									<input type="hidden" name="id" value="<?php echo $key->ID; ?>" />
+									<input type="hidden" name="user_id" value="<?php echo $key->USER_ID; ?>" />
+									<div align="center">
+										<input class="btn btn-sm btn-primary" value="Added By <?php echo e(isset($key->author['NAME']) ? $key->author['NAME'] : 'Unknown'); ?>" disabled="disabled" />
+										<input class="btn btn-sm btn-danger" type="Submit" value="Delete Topic"/>
+									</div>
+								<?php echo Form::close(); ?>
+								<?php endif; ?>
+							</div>
+						</div>
+					</div>
+					<?php endforeach; ?>
+				<?php else: ?>
+	             <div align="center"><h1>Damn! No topics at the moment are written.</h1></div>
+				<?php endif; ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

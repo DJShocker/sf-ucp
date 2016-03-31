@@ -1,0 +1,15 @@
+<?php if(count($errors->all())): ?>
+	<div class="alert alert-container alert-dismissable alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+         <?php foreach($errors->all() as $message): ?>
+            <p><?php echo $message; ?></p>
+         <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
+<?php if(Session::has('success')): ?>
+	<div class="alert alert-container alert-dismissable alert-success">
+    	<?php echo Session::get('success'); ?>
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    </div>
+<?php endif; ?>

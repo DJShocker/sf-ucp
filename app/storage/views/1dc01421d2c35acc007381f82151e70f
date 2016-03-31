@@ -1,0 +1,94 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+            <?php echo Form::open(array('route' => 'admin.player.search', 'method' => 'POST')); ?>
+
+            	<h3>Advanced Search</h3>
+
+				<div class="form-group">
+					<?php echo Form::label('table', 'Search Through', array('class' => 'control-label')); ?>
+
+					<?php echo Form::select('table', array('0' => 'All Users', '1' => 'Player Bans'), '0', array('class' => 'form-control')); ?>
+
+	            </div>
+
+				<div class="form-group">
+					<?php echo Form::label('name', 'Username', array('class' => 'control-label')); ?>
+
+	            	<?php echo Form::text('name', '', array('class' => 'form-control')); ?>
+
+	            </div>
+
+				<div class="form-group">
+					<?php echo Form::label('ip', 'IP Address (optional)', array('class' => 'control-label')); ?>
+
+	            	<?php echo Form::text('ip', '', array('class' => 'form-control')); ?>
+
+	            </div>
+
+				<div class="row form-group">
+					<div class="col-md-12"><?php echo Form::label('score', 'Score Between (optional)', array('class' => 'control-label')); ?></div>
+	            	<div class="col-md-6 col-sm-6 col-xs-6"><?php echo Form::text('score-min', '', array('class' => 'form-control', 'placeholder' => 'min')); ?></div>
+	            	<div class="col-md-6 col-sm-6 col-xs-6"><?php echo Form::text('score-max', '', array('class' => 'form-control', 'placeholder' => 'max')); ?></div>
+	            </div>
+
+				<div class="row form-group">
+					<div class="col-md-12"><?php echo Form::label('cash', 'Total Cash Between (optional)', array('class' => 'control-label')); ?></div>
+	            	<div class="col-md-6 col-sm-6 col-xs-6"><?php echo Form::text('cash-min', '', array('class' => 'form-control', 'placeholder' => 'min')); ?></div>
+	            	<div class="col-md-6 col-sm-6 col-xs-6"><?php echo Form::text('cash-max', '', array('class' => 'form-control', 'placeholder' => 'max')); ?></div>
+	            </div>
+
+				<div class="form-group">
+					<div class="checkbox block"><label><?php echo Form::checkbox('recent', '0', false); ?> Order by most recent accounts</label></div>
+				</div>
+
+	            <div align="center">
+		            <p><?php echo Form::submit('Search', array('class' => 'btn btn-success')); ?></p>
+		            <p><i>Only the IP or Username field will work as you search through bans.</i></p>
+	            </div>
+            <?php echo Form::close(); ?>
+
+		</div>
+		<div class="col-md-10">
+		    <div class="table-responsive">
+		        <table class="table">
+		          	<thead>
+					    <tr>
+	                        <th><a href="<?php echo Request::url(); ?>?page=<?php echo $users->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=name">Name</a></th>
+	                        <th><a href="<?php echo Request::url(); ?>?page=<?php echo $users->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=ip">Registered IP Address</a></th>
+	                        <th><a href="<?php echo Request::url(); ?>?page=<?php echo $users->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=lastip">Recent IP Address</a></th>
+	                        <th><a href="<?php echo Request::url(); ?>?page=<?php echo $users->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=score">Score</a></th>
+	                        <th><a href="<?php echo Request::url(); ?>?page=<?php echo $users->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=cash">On-Hand Money</a></th>
+	                        <th><a href="<?php echo Request::url(); ?>?page=<?php echo $users->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=bankcash">Bank Money</a></th>
+	                        <th><a href="<?php echo Request::url(); ?>?page=<?php echo $users->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=xp">XP</a></th>
+	                        <th><a href="<?php echo Request::url(); ?>?page=<?php echo $users->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=bounty">Current Bounty</a></th>
+	                        <th><a href="<?php echo Request::url(); ?>?page=<?php echo $users->getCurrentPage(); ?>&amp;sort=<?php echo $sort; ?>&amp;field=adminlevel">Admin level</a></th>
+					    </tr>
+				    </thead>
+
+				    <tbody>
+		           	<?php foreach($users as $user): ?>
+		                <tr>
+		                    <td><?php echo ucfirst($user->NAME); ?></td>
+		                    <td><?php echo $user->ADMINLEVEL >= 5 ? ("Private") : $user->IP; ?></td>
+		                    <td><?php echo $user->ADMINLEVEL >= 5 ? ("Private") : $user->LAST_IP; ?></td>
+		                    <td><?php echo $user->SCORE; ?></td>
+		                    <td><?php echo $user->CASH; ?></td>
+		                    <td><?php echo $user->BANKMONEY; ?></td>
+		                    <td><?php echo $user->XP; ?></td>
+		                    <td><?php echo $user->BOUNTY; ?></td>
+		                    <td><?php echo $user->ADMINLEVEL; ?></td>
+		                </tr>
+		         	<?php endforeach; ?>
+				    </tbody>
+			    </table>
+		    </div>
+
+			<div align="center"><?php echo $users->appends(array('sort' => ($sort == "desc") ? "asc" : "desc", 'field' => strtolower($field) ))->links(); ?></div>
+		</div>
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,15 @@
+<div id="page-heading">
+	<?php if(isset($breadCrumb)): ?>
+	<ol class="breadcrumb">
+		<?php foreach($breadCrumb as $index => $key): ?>
+			<?php if(!$index): ?>
+				<li class="active"><a href="/<?php echo strtolower($key); ?>"><?php echo $key; ?></a></li>
+			<?php else: ?>
+				<li><?php echo $key; ?></li>
+			<?php endif; ?>
+		<?php endforeach; ?>
+	</ol>
+	<?php endif; ?>
+
+	<h1><?php echo isset($pageheadTitle) ? $pageheadTitle : "Dashboard"; ?></h1>
+</div>

@@ -1,0 +1,181 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-danger">
+                <div class="panel-heading"><i class="fa fa-lock"></i> Ban Player</div>
+                <div class="panel-body">
+                    <?php echo Form::open(array('url' => '/admin/manage/ban', 'method' => 'post')); ?>
+
+
+                   		<p><?php echo Form::label('name', 'Name', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('name', '', array('class' => 'form-control')); ?></p>
+
+                   		<p><?php echo Form::label('reason', 'Reason', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('reason', '', array('class' => 'form-control')); ?></p>
+
+                        <br/><div align="center"><?php echo Form::submit('Ban Player', array('class' => 'btn btn-danger')); ?></div>
+                    <?php echo Form::close();; ?>
+
+                </div>
+            </div>
+		</div>
+
+		<div class="col-md-4">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><i class="fa fa-lock"></i> Army-Warn Player</div>
+                <div class="panel-body">
+                    <?php echo Form::open(array('url' => '/admin/manage/armyban', 'method' => 'post')); ?>
+
+                   		<?php echo Form::label('name', 'Name', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('name', '', array('class' => 'form-control')); ?>
+
+                        <br/><div align="center"><?php echo Form::submit('Army-Warn Player', array('class' => 'btn btn-danger')); ?></div>
+                    <?php echo Form::close();; ?>
+
+                </div>
+            </div>
+		</div>
+
+		<div class="col-md-4">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><i class="fa fa-lock"></i> Cop-Warn Player</div>
+                <div class="panel-body">
+                    <?php echo Form::open(array('url' => '/admin/manage/copban', 'method' => 'post')); ?>
+
+                   		<?php echo Form::label('name', 'Name', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('name', '', array('class' => 'form-control')); ?>
+
+                        <br/><div align="center"><?php echo Form::submit('Cop-Warn Player', array('class' => 'btn btn-danger')); ?></div>
+                    <?php echo Form::close();; ?>
+
+                </div>
+            </div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading"><i class="fa fa-unlock"></i> Unban Player</div>
+                <div class="panel-body">
+                    <?php echo Form::open(array('url' => '/admin/manage/unban', 'method' => 'post')); ?>
+
+                   		<p><?php echo Form::label('name', 'Name', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('name', '', array('class' => 'form-control')); ?></p>
+
+                   		<p><?php echo Form::label('name', 'IP Address (optional)', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('ip', '', array('class' => 'form-control')); ?></p>
+                        <br/><div align="center"><?php echo Form::submit('Unban Player', array('class' => 'btn btn-success')); ?></div>
+                    <?php echo Form::close();; ?>
+
+                </div>
+            </div>
+		</div>
+
+		<div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading"><i class="fa fa-unlock"></i> Un-Army-Warn Player</div>
+                <div class="panel-body">
+                    <?php echo Form::open(array('url' => '/admin/manage/unarmyban', 'method' => 'post')); ?>
+
+                   		<?php echo Form::label('name', 'Name', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('name', '', array('class' => 'form-control')); ?>
+
+                        <br/><div align="center"><?php echo Form::submit('Un-Army-Warn Player', array('class' => 'btn btn-success')); ?></div>
+                    <?php echo Form::close();; ?>
+
+                </div>
+            </div>
+		</div>
+
+		<div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading"><i class="fa fa-unlock"></i> Un-Cop-Warn Player</div>
+                <div class="panel-body">
+                    <?php echo Form::open(array('url' => '/admin/manage/uncopban', 'method' => 'post')); ?>
+
+                   		<?php echo Form::label('name', 'Name', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('name', '', array('class' => 'form-control')); ?>
+
+                        <br/><div align="center"><?php echo Form::submit('Un-Cop-Warn Player', array('class' => 'btn btn-success')); ?></div>
+                    <?php echo Form::close();; ?>
+
+                </div>
+            </div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><i class="fa fa-edit"></i> Change Account Password</div>
+                <div class="panel-body">
+                    <?php echo Form::open(array('url' => '/admin/manage/password', 'method' => 'post')); ?>
+
+                   		<p><?php echo Form::label('name', 'Name', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('name', '', array('class' => 'form-control')); ?></p>
+
+                   		<p><?php echo Form::label('password', 'New Password', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('password', '', array('class' => 'form-control')); ?></p>
+                        <br/><div align="center"><?php echo Form::submit('Change Password', array('class' => 'btn btn-primary')); ?></div>
+                    <?php echo Form::close();; ?>
+
+                </div>
+            </div>
+		</div>
+
+		<div class="col-md-4">
+            <div class="panel panel-warning">
+                <div class="panel-heading"><i class="fa fa-eye-slash"></i> Jail Player</div>
+                <div class="panel-body">
+                    <?php echo Form::open(array('url' => '/admin/manage/jail' , 'method' => 'post')); ?>
+
+                   		<p><?php echo Form::label('name', 'Name', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('name', '', array('class' => 'form-control')); ?></p>
+
+                   		<p><?php echo Form::label('seconds', 'Seconds', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('seconds', '', array('class' => 'form-control')); ?></p>
+                        <br/><div align="center"><?php echo Form::submit('Jail Player', array('class' => 'btn btn-warning')); ?></div>
+                    <?php echo Form::close();; ?>
+
+                </div>
+            </div>
+		</div>
+
+		<div class="col-md-4">
+            <div class="panel panel-inverse">
+                <div class="panel-heading"><i class="fa fa-times-circle-o"></i> Mute Player</div>
+                <div class="panel-body">
+                    <?php echo Form::open(array('url' => '/admin/manage/mute' , 'method' => 'post')); ?>
+
+                   		<p><?php echo Form::label('name', 'Name', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('name', '', array('class' => 'form-control')); ?></p>
+
+                   		<p><?php echo Form::label('seconds', 'Seconds', array('class' => 'control-label')); ?>
+
+	            		<?php echo Form::text('seconds', '', array('class' => 'form-control')); ?></p>
+                        <br/><div align="center"><?php echo Form::submit('Mute Player', array('class' => 'btn btn-inverse')); ?></div>
+                    <?php echo Form::close();; ?>
+
+                </div>
+            </div>
+		</div>
+	</div>
+
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

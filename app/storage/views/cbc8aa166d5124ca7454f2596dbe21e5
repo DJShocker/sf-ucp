@@ -1,0 +1,314 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3 col-xs-12 col-sm-6">
+                    <a class="info-tiles tiles-success" href="<?php echo URL::to('help'); ?>">
+                        <div class="tiles-heading">Cash at bank and on-hand</div>
+                        <div class="tiles-body-alt">
+                            <!--i class="fa fa-bar-chart-o"></i-->
+                            <div class="text-center"><span class="text-top">$</span><?php echo number_format($currentUser->CASH + $currentUser->BANKMONEY); ?></div>
+                            <small>
+                                <?php if(($currentUser->CASH < $currentUser->BANKMONEY && !$currentUser->BANKMONEY) || ($currentUser->CASH > $currentUser->BANKMONEY && !$currentUser->CASH)): ?>
+                                    100.0%
+                                <?php elseif(!$currentUser->CASH AND !$currentUser->BANKMONEY): ?>
+                                	0.0%
+                                <?php else: ?>
+                                    <?php echo $currentUser->CASH > $currentUser->BANKMONEY ? sprintf('%.1f%%', abs($currentUser->BANKMONEY / ($currentUser->CASH))*100) : sprintf('%.1f%%', abs($currentUser->CASH / ($currentUser->BANKMONEY))*100); ?>
+
+                                <?php endif; ?>
+                                Being <?php echo $currentUser->CASH < $currentUser->BANKMONEY ? ('On-Hand') : ('Banked'); ?>
+
+                            </small>
+                        </div>
+                        <div class="tiles-footer">knowledge is power, and you can't buy it!</div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-xs-12 col-sm-6">
+                    <a class="info-tiles tiles-primary" href="<?php echo URL::to('economics'); ?>">
+                        <div class="tiles-heading">Economics</div>
+                        <div class="tiles-body-alt">
+                            <i class="fa fa-money"></i>
+                            <div class="text-center"><?php echo $taxRate; ?></div>
+                            <small>Current Tax Rate</small>
+                        </div>
+                        <div class="tiles-footer">visit the economics center!</div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-xs-12 col-sm-6">
+                    <a class="info-tiles tiles-toyo" href="samp://svr.irresistiblegaming.com:7777">
+                        <div class="tiles-heading">Server Status</div>
+                        <div class="tiles-body-alt">
+                            <i class="fa fa-group"></i>
+                            <div class="text-center"><?php echo $serverPlayers; ?></div>
+                            <small>Players Online</small>
+                        </div>
+                        <div class="tiles-footer">join the fun today!</div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-xs-12 col-sm-6">
+                    <a class="info-tiles tiles-orange" href="http://donate.irresistiblegaming.com">
+                        <div class="tiles-heading">VIP Status</div>
+                        <div class="tiles-body-alt">
+                            <i class="fa fa-star"></i>
+                            <?php if($currentUser->VIP_PACKAGE): ?>
+                                <div class="text-center"><?php echo Gliee\Irresistible\Utils::vipToString($currentUser->VIP_PACKAGE); ?></div>
+                                <small>Expires <?php echo isset($vipExpiry) ? $vipExpiry : 'Never'; ?></small>
+                            <?php else: ?>                            
+                                <div class="text-center">None :(</div>
+                                <small>No VIP Active</small>
+                            <?php endif; ?>
+                        </div>
+                        <div class="tiles-footer"><?php echo $currentUser->VIP_PACKAGE ? 'you can always donate to renew!' : 'donate today and redeem vip!'; ?></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4>Total Money Being Printed</h4>
+                </div>
+                <div class="panel-body">
+                    <div id="cashPrinted" style="height: 300px"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-midnightblue">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-wrench"></i> General Statistics</h4>
+                </div>
+                <div class="panel-body panel-stats">
+                    <table class="table table-stats table-hover">
+                        <tbody>
+                            <tr>
+                                <td>Admin Level</td>
+                                <td><?php echo Gliee\Irresistible\Utils::adminlevelToString($currentUser->ADMINLEVEL); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total Irresistible Coins</td>
+                                <td><?php echo $currentUser->COINS; ?> <a href="//donate.irresistiblegaming.com"><span class="label label-primary pull-right">Get more!</span></a></td>
+                            <tr>
+                                <td>Time Online</td>
+                                <td><?php echo $timeOnline; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Weekly Playtime</td>
+                                <td><?php echo $timeOnlineWeekly; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Cop-Banned</td>
+                                <td><?php echo $currentUser->COP_BAN >= 3 ? 'Yes' : 'No'; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Army-Banned</td>
+                                <td><?php echo $currentUser->ARMY_BAN >= 3 ? 'Yes' : 'No'; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Muted Time</td>
+                                <td><?php echo isset($mutedTime) ? $mutedTime : 'Not Muted'; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Jail Time</td>
+                                <td><?php echo isset($jailedTime) ? $jailedTime : 'Not Jailed'; ?> <?php if($jailedTime > 0 AND $currentUser->JAIL_ADMIN == true): ?><span class="label label-danger pull-right">ADMIN JAILED</span><?php endif; ?>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-brown">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-gamepad"></i> Game Statistics</h4>
+                </div>
+                <div class="panel-body panel-stats">
+                    <table class="table table-stats table-hover">
+                        <tbody>
+                            <tr>
+                                <td>Job</td>
+                                <td><?php echo Gliee\Irresistible\Utils::skillToString($currentUser->JOB); ?></td>
+                            </tr>
+                            <tr>
+                                <td>VIP Job</td>
+                                <td>
+                                    <?php if($currentUser->VIP_PACKAGE <= 0): ?>
+                                        <a href="//donate.irresistiblegaming.com">You are not a VIP, become one today!</a> 
+                                    <?php else: ?>
+                                        <?php echo Gliee\Irresistible\Utils::skillToString($currentUser->VIP_JOB); ?></td>
+                                    <?php endif; ?>
+                            </tr>
+                            <tr>
+                                <td>Score</td>
+                                <td><?php echo number_format($currentUser->SCORE); ?></td>
+                            </tr>
+                            <tr>
+                                <td>XP</td>
+                                <td><?php echo number_format($currentUser->XP); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Cash On-Hand</td>
+                                <td>$<?php echo number_format($currentUser->CASH); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Cash At Bank</td>
+                                <td>$<?php echo number_format($currentUser->BANKMONEY); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Kills</td>
+                                <td><?php echo number_format($currentUser->KILLS); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Deaths</td>
+                                <td><?php echo number_format($currentUser->DEATHS); ?></td>
+                            </tr>
+                            <tr>
+                                <td>K/D Ratio</td>
+                                <td><?php echo $kdRatio; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Owned Houses</td>
+                                <td><?php echo $currentUser->OWNEDHOUSES; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Owned Vehicles</td>
+                                <td><?php echo $currentUser->OWNEDCARS; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Owned Garages</td>
+                                <td><?php echo $numberGarages; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total Arrests</td>
+                                <td><?php echo number_format($currentUser->ARRESTS); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total Robberies</td>
+                                <td><?php echo number_format($currentUser->ROBBERIES); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total Extinguished Fires</td>
+                                <td><?php echo number_format($currentUser->FIRES); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total Completed Hits</td>
+                                <td><?php echo number_format($currentUser->CONTRACTS); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total Burglaries</td>
+                                <td><?php echo number_format($currentUser->BURGLARIES); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total Cars Jacked</td>
+                                <td><?php echo number_format($currentUser->VEHICLES_JACKED); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total Meth Yielded</td>
+                                <td><?php echo number_format($currentUser->METH_YIELDED); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Blew Bank Vault</td>
+                                <td><?php echo number_format($currentUser->BLEW_VAULT); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Blew Jail Cells</td>
+                                <td><?php echo number_format($currentUser->BLEW_JAILS); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Total Trucked Cargo</td>
+                                <td><?php echo number_format($currentUser->TRUCKED); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Current Bounty</td>
+                                <td>$<?php echo number_format($currentUser->BOUNTY); ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-shopping-cart"></i> Item Statistics</h4>
+                </div>
+                <div class="panel-body panel-stats">
+                    <table class="table table-stats table-hover">
+                        <tbody>
+                            <tr>
+                                <td>Rope</td>
+                                <td><?php echo $currentUser->ROPES; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Metal Melters</td>
+                                <td><?php echo $currentUser->MELTERS; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Scissors</td>
+                                <td><?php echo $currentUser->SCISSORS; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Weed</td>
+                                <td><?php echo $currentUser->WEED; ?> grams</td>
+                            </tr>
+                            <tr>
+                                <td>Aluminum Foil</td>
+                                <td><?php echo $currentUser->FOILS; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Bobby Pins</td>
+                                <td><?php echo $currentUser->PINS; ?></td>
+                            </tr>
+                            <tr>
+                                <td>C4</td>
+                                <td><?php echo $currentUser->C4; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Caustic Soda</td>
+                                <td><?php echo $currentUser->SODA; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Muriatic Acid</td>
+                                <td><?php echo $currentUser->ACID; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Hydrogen Chloride</td>
+                                <td><?php echo $currentUser->GAS; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Methamphetamine (meth)</td>
+                                <td><?php echo $currentUser->METH; ?> pounds</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 hidden-xs">
+            <div class="panel panel-primary">
+                <div class="panel-heading">User Statistics <small class="pull-right"><strong>This link shows the raw image:</strong> <?php echo URL::to('/'); ?>/sig/<?php echo $currentUser->ID; ?></small></div>
+                <div class="panel-body">
+                    <div align="center"><img src="<?php echo URL::to('/'); ?>/sig/<?php echo $currentUser->ID; ?>" class="img-responsive"><!--<h4><span class="label label-default">?bg={url}</span> is used to specify the URL of the background, PNG only!</h4>--></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('jscontent'); ?>
+<script type='text/javascript' src='assets/plugins/charts-flot/jquery.flot.min.js'></script>
+<script type='text/javascript' src='assets/plugins/charts-flot/jquery.flot.resize.min.js'></script>
+<script type='text/javascript' src='assets/plugins/charts-flot/jquery.flot.time.min.js'></script>
+<script type='text/javascript' src='assets/js/flotgraph.js'></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

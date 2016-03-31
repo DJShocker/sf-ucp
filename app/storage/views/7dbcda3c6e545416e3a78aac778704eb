@@ -1,0 +1,71 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+            <?php echo Form::open(array('route' => 'admin.trans.search', 'method' => 'POST')); ?>
+
+            	<h3>Search Transaction Log</h3>
+
+				<div class="form-group">
+					<?php echo Form::label('searchType', 'Search Type', array('class' => 'control-label')); ?>
+
+	            	<?php echo Form::select('searchType', ['Money', 'Irresistible Coins'], Input::get('searchType'), array('class' => 'form-control')); ?>
+
+	            </div>
+
+				<div class="form-group">
+					<?php echo Form::label('toName', 'To Username', array('class' => 'control-label')); ?>
+
+	            	<?php echo Form::text('toName', trim(strip_tags(Input::get('toName'))), array('class' => 'form-control')); ?>
+
+	            </div>
+
+				<div class="form-group">
+					<?php echo Form::label('fromName', 'From Username', array('class' => 'control-label')); ?>
+
+	            	<?php echo Form::text('fromName', trim(strip_tags(Input::get('fromName'))), array('class' => 'form-control')); ?>
+
+	            </div>
+
+	            <div align="center">
+		         	<p><?php echo Form::submit('Search Logs', array('class' => 'btn btn-success')); ?></p>
+	            </div>
+            <?php echo Form::close(); ?>
+
+		</div>
+		<div class="col-md-10">
+		    <div class="table-responsive">
+		        <table class="table">
+		          	<thead>
+					    <tr>
+	                        <th>From Name</th>
+	                        <th>To Name</th>
+	                        <th>Amount</th>
+	                        <th>Date</th>
+					    </tr>
+				    </thead>
+
+				    <tbody>
+		           	<?php $__empty_1 = true; foreach($transactionsLog as $key): $__empty_1 = false; ?>
+		                <tr>
+		                	<td><?php echo isset($key->toUser->NAME) ? $key->toUser->NAME : "<i>Invalid User</i>"; ?></td>
+		                	<td><?php echo isset($key->fromUser->NAME) ? $key->fromUser->NAME : "<i>Invalid User</i>"; ?></td>
+		                	<td><?php echo isset($key->CASH) ? '$' . number_format($key->CASH) : $key->IC; ?></td>
+		                	<td><?php echo $key->DATE; ?></td>
+		                </tr>
+		          	<?php endforeach; if ($__empty_1): ?>
+		          		<tr>
+		          			<td colspan="4" class="h3 text-center"><br>No transactions could be found!</td>
+		          		</tr>
+		         	<?php endif; ?>
+				    </tbody>
+			    </table>
+		    </div>
+
+		    <div class="text-center"><?php echo $transactionsLog->appends(['searchType' => trim(Input::get('searchType')), 'toName' => trim(Input::get('toName')), 'fromName' => Input::get('fromName')])->links(); ?></div>
+		</div>
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

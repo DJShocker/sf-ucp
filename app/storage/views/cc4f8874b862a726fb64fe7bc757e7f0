@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><?php echo Config::get('irresistible.title'); ?> <?php echo isset($pageheadTitle) ? ('- ' . ucfirst($pageheadTitle)) : (''); ?></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='http://fonts.googleapis.com/css?family=Montserrat|Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="<?php echo URL::asset('assets/css/styles.css'); ?>">
+  </head>
+ <body class="focusedform">
+    <div class="verticalcenter">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <h4 class="text-center">
+            SF-UCP<br>
+            <a href="//revctrl.com/IrresistibleDev/SF-UCP/latest" style="text-decoration: none" target="_blank"><small class="text-center">See what's new!</small></a>
+          </h4>
+          <!-- Begin login form -->
+          <?php echo Form::open(['url' => '/auth/new', 'class' => 'form-horizontal', 'method' => 'post']); ?>
+
+
+            <div class="form-group <?php echo count($errors->all()) ? 'has-error' : ''; ?>">
+              <?php echo Form::label('username', 'Username', ['class'=>'control-label col-sm-3', 'style'=>'text-align: left;']); ?>
+
+              <div class="col-sm-9">              
+                <?php echo Form::text('username', '', ['class' => 'form-control']); ?>
+
+              </div>
+            </div>
+
+            <div class="form-group <?php echo count($errors->all()) ? 'has-error' : ''; ?>">
+              <?php echo Form::label('password', 'Password', ['class'=>'control-label col-sm-3', 'style'=>'text-align: left;']); ?>
+
+              <div class="col-sm-9">              
+                <?php echo Form::password('password', ['class' => 'form-control']); ?>
+
+
+                <?php if(isset($errors)): ?>
+                <ul style="display: block;" class="help-block list-unstyled">
+                  <?php foreach($errors->all() as $error): ?>
+                  <li style="display: list-item;" class="required"><?php echo $error; ?></li>
+                  <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+              </div>
+            </div>
+
+            <?php echo Form::submit('Login', ['class'=>'btn btn-primary btn-block']); ?>
+
+          <?php echo Form::close(); ?>
+
+          <!-- End of login form -->
+        </div>
+        <div class="panel-footer"> 
+          <div class="text-center">&copy; IrresistibleGaming, 2011.</div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src='<?php echo URL::asset("/assets/js/jquery-1.10.2.min.js"); ?>'></script>
+    <script type='text/javascript' src='<?php echo URL::asset("/assets/js/bootstrap.min.js"); ?>'></script>
+    <script type='text/javascript' src='<?php echo URL::asset("/assets/js/placeholdr.js"); ?>'></script>
+    <script type='text/javascript' src='<?php echo URL::asset("/assets/js/application.js"); ?>'></script>
+  </body>
+</html>

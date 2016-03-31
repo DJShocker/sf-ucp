@@ -1,0 +1,143 @@
+
+
+<?php $__env->startSection('content'); ?>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <a class="info-tiles tiles-sky" href="#">
+                <div class="tiles-heading">
+                    <div class="pull-left">Total Registered Players</div>
+                </div>
+                <div class="tiles-body">
+                    <div class="pull-left"><i class="fa fa-group"></i></div>
+                    <div class="pull-right"><?php echo Gliee\Irresistible\Utils::humanNumberFormat($registeredUsers); ?></div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <a class="info-tiles tiles-danger" href="#">
+                <div class="tiles-heading">
+                    <div class="pull-left">Total Banned Users</div>
+                </div>
+                <div class="tiles-body">
+                    <div class="pull-left"><i class="fa fa-ban"></i></div>
+                    <div class="pull-right"><?php echo Gliee\Irresistible\Utils::humanNumberFormat($bannedUsers); ?></div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <a class="info-tiles tiles-green" href="#">
+                <div class="tiles-heading">
+                    <div class="pull-left">Total Printed Money</div>
+                </div>
+                <div class="tiles-body">
+                    <div class="pull-left"><i class="fa fa-money"></i></div>
+                    <div class="pull-right">$<?php echo Gliee\Irresistible\Utils::humanNumberFormat($totalCash); ?></div>
+                </div>
+            </a>
+        </div>
+
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <a class="info-tiles tiles-primary" href="#">
+                <div class="tiles-heading">
+                    <div class="pull-left">Tax Rate</div>
+                </div>
+                <div class="tiles-body">
+                    <div class="pull-left"><i class="fa fa-dollar"></i></div>
+                    <div class="pull-right"><?php echo $taxRate; ?></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <a class="info-tiles tiles-inverse" href="#">
+                <div class="tiles-heading">
+                    <div class="pull-left">Total Server Vehicles</div>
+                </div>
+                <div class="tiles-body">
+                    <div class="pull-left"><i class="fa fa-truck"></i></div>
+                    <div class="pull-right"><?php echo $totalVehicles; ?></div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <a class="info-tiles tiles-indigo" href="#">
+                <div class="tiles-heading">
+                    <div class="pull-left">Total Server Houses</div>
+                </div>
+                <div class="tiles-body">
+                    <div class="pull-left"><i class="fa fa-home"></i></div>
+                    <div class="pull-right"><?php echo $totalHouses; ?></div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <a class="info-tiles tiles-brown" href="#">
+                <div class="tiles-heading">
+                    <div class="pull-left">Total Server Gates</div>
+                </div>
+                <div class="tiles-body">
+                    <div class="pull-left"><i class="fa fa-sign-in"></i></div>
+                    <div class="pull-right"><?php echo $totalGates; ?></div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <a class="info-tiles tiles-magenta" href="#">
+                <div class="tiles-heading">
+                    <div class="pull-left">Total Server Apartments</div>
+                </div>
+                <div class="tiles-body">
+                    <div class="pull-left"><i class="fa fa-suitcase"></i></div>
+                    <div class="pull-right"><?php echo $totalApartments; ?></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-warning">
+                <div class="panel-heading">V.I.P Player Notes</div>
+                <div class="panel-body panel-stats" style="height:400px; overflow:auto;">
+                <?php if(!count($playerNotes)): ?>
+                    <div align="center" style="padding-top:125px"><h1>There aren't any V.I.P player notes currently.</h1></div>
+                <?php else: ?>
+                    <table class="table table-stats table-hover">
+                        <thead>
+                            <tr>
+                                <td><strong>ID</strong></td>
+                                <td><strong>Date</strong></td>
+                                <td><strong>User</strong></td>
+                                <td><strong>Added By</strong></td>
+                                <td><strong>Note</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($playerNotes as $key): ?>
+                            <tr>
+                                <td><?php echo e($key->ID); ?></td>
+                                <td><?php echo e($key->TIME); ?></td>
+                                <td><?php echo e($key->user->NAME); ?></td>
+                                <td><?php echo e($key->author->NAME); ?></td>
+                                <td><?php echo e(preg_replace('/(?i){[a-f0-9]+}/', '', $key->NOTE)); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,52 @@
+
+
+<?php $__env->startSection('content'); ?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        	<div class="table-responsive">
+	            <table class="table">
+	                <thead>
+	                    <tr>
+	                        <th>Name</th>
+	                        <th>Admin Level/Rank</th>
+	                        <th>Last Logged</th>
+	                        <th>Weekly Playtime</th>
+	                    </tr>
+	                </thead>
+	                <tbody>						
+						<tr>
+							<td>Lorenc</td>
+							<td><font color="#FF6200"><strong>Developer</strong></font></td>
+							<td>n/a</td>
+							<td>n/a</td>
+						</tr>
+						<tr>
+							<td>XFlawless</td>
+							<td><font color="#FF6200"><strong>Developer</strong></font></td>
+							<td>n/a</td>
+							<td>n/a</td>
+						</tr>
+						<?php foreach($adminList as $user): ?>
+							<?php if($user->NAME != "Lorenc" AND $user->NAME != "XFlawless"): ?>
+						<tr>
+							<td><?php echo ucfirst($user->NAME); ?></td>
+                        	<td><?php echo Gliee\Irresistible\Utils::adminlevelToString($user->ADMINLEVEL); ?></td>
+                        	<td><?php echo Carbon\Carbon::createFromTimeStamp($user->LASTLOGGED)->diffForHumans(); ?></td>
+                        	<td><?php echo Gliee\Irresistible\Utils::secondstohuman($user->UPTIME - $user->WEEKEND_UPTIME); ?></td>
+						</tr>
+							<?php endif; ?>
+						<?php endforeach; ?>
+	                </tbody>
+	                <caption>There are currently a total of <?php echo $totalAdmins; ?> administrators.</caption>
+	            </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('jscontent'); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout/application', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

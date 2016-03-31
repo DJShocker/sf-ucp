@@ -1,0 +1,373 @@
+@extends('layout/application')
+
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Played for 20 minutes</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->UPTIME > (60*20) ? 100 : round(($currentUser->UPTIME / (60*20)) * 100)}}%"></div>
+            </div>
+            <p>Played for 1 hour</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->UPTIME > (60*60) ? 100 : round(($currentUser->UPTIME / (60*60)) * 100)}}%"></div>
+            </div>
+            <p>Played for 5 hours</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->UPTIME > (60*60*5) ? 100 : round(($currentUser->UPTIME / (60*60*5)) * 100)}}%"></div>
+            </div>
+            <p>Played for 10 hours</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->UPTIME > (60*60*10) ? 100 : round(($currentUser->UPTIME / (60*60*10)) * 100)}}%"></div>
+            </div>
+            <p>Played for 15 hours</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->UPTIME > (60*60*15) ? 100 : round(($currentUser->UPTIME / (60*60*15)) * 100)}}%"></div>
+            </div>
+            <p>Played for 20 hours</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->UPTIME > (60*60*20) ? 100 : round(($currentUser->UPTIME / (60*60*20)) * 100)}}%"></div>
+            </div>
+            <p>Played a whole day</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->UPTIME > (60*60*24) ? 100 : round(($currentUser->UPTIME / (60*60*24)) * 100)}}%"></div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>5 Kills</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->KILLS > 5 ? 100 : round(($currentUser->KILLS / (5)) * 100)}}%"></div>
+            </div>
+            <p>20 Kills</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->KILLS > 20 ? 100 : round(($currentUser->KILLS / (20)) * 100)}}%"></div>
+            </div>
+            <p>50 Kills</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->KILLS > 50 ? 100 : round(($currentUser->KILLS / (50)) * 100)}}%"></div>
+            </div>
+            <p>100 Kills</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->KILLS > 100 ? 100 : round(($currentUser->KILLS / (100)) * 100)}}%"></div>
+            </div>
+            <p>200 Kills</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->KILLS > 200 ? 100 : round(($currentUser->KILLS / (200)) * 100)}}%"></div>
+            </div>
+            <p>500 Kills</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->KILLS > 500 ? 100 : round(($currentUser->KILLS / (500)) * 100)}}%"></div>
+            </div>
+            <p>1000 Kills</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->KILLS > 1000 ? 100 : round(($currentUser->KILLS / (1000)) * 100)}}%"></div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Arrested 5 Criminals</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->ARRESTS > 5 ? 100 : round(($currentUser->ARRESTS / (5)) * 100)}}%"></div>
+            </div>
+            <p>Arrested 20 Criminals</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->ARRESTS > 20 ? 100 : round(($currentUser->ARRESTS / (20)) * 100)}}%"></div>
+            </div>
+            <p>Arrested 50 Criminals</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->ARRESTS > 50 ? 100 : round(($currentUser->ARRESTS / (50)) * 100)}}%"></div>
+            </div>
+            <p>Arrested 100 Criminals</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->ARRESTS > 100 ? 100 : round(($currentUser->ARRESTS / (100)) * 100)}}%"></div>
+            </div>
+            <p>Arrested 200 Criminals</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->ARRESTS > 200 ? 100 : round(($currentUser->ARRESTS / (200)) * 100)}}%"></div>
+            </div>
+            <p>Arrested 500 Criminals</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->ARRESTS > 500 ? 100 : round(($currentUser->ARRESTS / (500)) * 100)}}%"></div>
+            </div>
+            <p>Arrested 1000 Criminals</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->ARRESTS > 1000 ? 100 : round(($currentUser->ARRESTS / (1000)) * 100)}}%"></div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Committed 5 Burglaries</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->BURGLARIES > 5 ? 100 : round(($currentUser->BURGLARIES / (5)) * 100)}}%"></div>
+            </div>
+            <p>Committed 20 Burglaries</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->BURGLARIES > 20 ? 100 : round(($currentUser->BURGLARIES / (20)) * 100)}}%"></div>
+            </div>
+            <p>Committed 50 Burglaries</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->BURGLARIES > 50 ? 100 : round(($currentUser->BURGLARIES / (50)) * 100)}}%"></div>
+            </div>
+            <p>Committed 100 Burglaries</p>
+            <div class="progress ">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->BURGLARIES > 100 ? 100 : round(($currentUser->BURGLARIES / (100)) * 100)}}%"></div>
+            </div>
+            <p>Committed 200 Burglaries</p>
+            <div class="progress ">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->BURGLARIES > 200 ? 100 : round(($currentUser->BURGLARIES / (200)) * 100)}}%"></div>
+            </div>
+            <p>Committed 500 Burglaries</p>
+            <div class="progress ">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->BURGLARIES > 500 ? 100 : round(($currentUser->BURGLARIES / (500)) * 100)}}%"></div>
+            </div>
+            <p>Committed 1000 Burglaries</p>
+            <div class="progress ">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->BURGLARIES > 1000 ? 100 : round(($currentUser->BURGLARIES / (1000)) * 100)}}%"></div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Robbed 5 Stores</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->ROBBERIES > 5 ? 100 : round(($currentUser->ROBBERIES / (5)) * 100)}}%"></div>
+            </div>
+            <p>Robbed 20 Stores</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->ROBBERIES > 20 ? 100 : round(($currentUser->ROBBERIES / (20)) * 100)}}%"></div>
+            </div>
+            <p>Robbed 50 Stores</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->ROBBERIES > 50 ? 100 : round(($currentUser->ROBBERIES / (50)) * 100)}}%"></div>
+            </div>
+            <p>Robbed 100 Stores</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->ROBBERIES > 100 ? 100 : round(($currentUser->ROBBERIES / (100)) * 100)}}%"></div>
+            </div>
+            <p>Robbed 200 Stores</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->ROBBERIES > 200 ? 100 : round(($currentUser->ROBBERIES / (200)) * 100)}}%"></div>
+            </div>
+            <p>Robbed 500 Stores</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->ROBBERIES > 500 ? 100 : round(($currentUser->ROBBERIES / (500)) * 100)}}%"></div>
+            </div>
+            <p>Robbed 1000 Stores</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->ROBBERIES > 1000 ? 100 : round(($currentUser->ROBBERIES / (1000)) * 100)}}%"></div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Completed 5 Hits</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-inverse" style="width: {{$currentUser->CONTRACTS > 5 ? 100 : round(($currentUser->CONTRACTS / (5)) * 100)}}%"></div>
+            </div>
+            <p>Completed 20 Hits</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-inverse" style="width: {{$currentUser->CONTRACTS > 20 ? 100 : round(($currentUser->CONTRACTS / (20)) * 100)}}%"></div>
+            </div>
+            <p>Completed 50 Hits</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-inverse" style="width: {{$currentUser->CONTRACTS > 50 ? 100 : round(($currentUser->CONTRACTS / (50)) * 100)}}%"></div>
+            </div>
+            <p>Completed 100 Hits</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-inverse" style="width: {{$currentUser->CONTRACTS > 100 ? 100 : round(($currentUser->CONTRACTS / (100)) * 100)}}%"></div>
+            </div>
+            <p>Completed 200 Hits</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-inverse" style="width: {{$currentUser->CONTRACTS > 200 ? 100 : round(($currentUser->CONTRACTS / (200)) * 100)}}%"></div>
+            </div>
+            <p>Completed 500 Hits</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-inverse" style="width: {{$currentUser->CONTRACTS > 500 ? 100 : round(($currentUser->CONTRACTS / (500)) * 100)}}%"></div>
+            </div>
+            <p>Completed 1000 Hits</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-inverse" style="width: {{$currentUser->CONTRACTS > 1000 ? 100 : round(($currentUser->CONTRACTS / (1000)) * 100)}}%"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Extinguished 5 Fires</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->FIRES > 5 ? 100 : round(($currentUser->FIRES / (5)) * 100)}}%"></div>
+            </div>
+            <p>Extinguished 20 Fires</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->FIRES > 20 ? 100 : round(($currentUser->FIRES / (20)) * 100)}}%"></div>
+            </div>
+            <p>Extinguished 50 Fires</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->FIRES > 50 ? 100 : round(($currentUser->FIRES / (50)) * 100)}}%"></div>
+            </div>
+            <p>Extinguished 100 Fires</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->FIRES > 100 ? 100 : round(($currentUser->FIRES / (100)) * 100)}}%"></div>
+            </div>
+            <p>Extinguished 200 Fires</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->FIRES > 200 ? 100 : round(($currentUser->FIRES / (200)) * 100)}}%"></div>
+            </div>
+            <p>Extinguished 500 Fires</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->FIRES > 500 ? 100 : round(($currentUser->FIRES / (500)) * 100)}}%"></div>
+            </div>
+            <p>Extinguished 1000 Fires</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->FIRES > 1000 ? 100 : round(($currentUser->FIRES / (1000)) * 100)}}%"></div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Yielded 5 Meth Bags</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info" style="width: {{$currentUser->METH_YIELDED > 5 ? 100 : round(($currentUser->METH_YIELDED / (5)) * 100)}}%"></div>
+            </div>
+            <p>Yielded 20 Meth Bags</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info" style="width: {{$currentUser->METH_YIELDED > 20 ? 100 : round(($currentUser->METH_YIELDED / (20)) * 100)}}%"></div>
+            </div>
+            <p>Yielded 50 Meth Bags</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info" style="width: {{$currentUser->METH_YIELDED > 50 ? 100 : round(($currentUser->METH_YIELDED / (50)) * 100)}}%"></div>
+            </div>
+            <p>Yielded 100 Meth Bags</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info" style="width: {{$currentUser->METH_YIELDED > 100 ? 100 : round(($currentUser->METH_YIELDED / (100)) * 100)}}%"></div>
+            </div>
+            <p>Yielded 200 Meth Bags</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info" style="width: {{$currentUser->METH_YIELDED > 200 ? 100 : round(($currentUser->METH_YIELDED / (200)) * 100)}}%"></div>
+            </div>
+            <p>Yielded 500 Meth Bags</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info" style="width: {{$currentUser->METH_YIELDED > 500 ? 100 : round(($currentUser->METH_YIELDED / (500)) * 100)}}%"></div>
+            </div>
+            <p>Yielded 1000 Meth Bags</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info" style="width: {{$currentUser->METH_YIELDED > 1000 ? 100 : round(($currentUser->METH_YIELDED / (1000)) * 100)}}%"></div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Stole And Cashed 5 Vehicles</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->VEHICLES_JACKED > 5 ? 100 : round(($currentUser->VEHICLES_JACKED / (5)) * 100)}}%"></div>
+            </div>
+            <p>Stole And Cashed 20 Vehicles</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->VEHICLES_JACKED > 20 ? 100 : round(($currentUser->VEHICLES_JACKED / (20)) * 100)}}%"></div>
+            </div>
+            <p>Stole And Cashed 50 Vehicles</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->VEHICLES_JACKED > 50 ? 100 : round(($currentUser->VEHICLES_JACKED / (50)) * 100)}}%"></div>
+            </div>
+            <p>Stole And Cashed 100 Vehicles</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->VEHICLES_JACKED > 100 ? 100 : round(($currentUser->VEHICLES_JACKED / (100)) * 100)}}%"></div>
+            </div>
+            <p>Stole And Cashed 200 Vehicles</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->VEHICLES_JACKED > 200 ? 100 : round(($currentUser->VEHICLES_JACKED / (200)) * 100)}}%"></div>
+            </div>
+            <p>Stole And Cashed 500 Vehicles</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->VEHICLES_JACKED > 500 ? 100 : round(($currentUser->VEHICLES_JACKED / (500)) * 100)}}%"></div>
+            </div>
+            <p>Stole And Cashed 1000 Vehicles</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: {{$currentUser->VEHICLES_JACKED > 1000 ? 100 : round(($currentUser->VEHICLES_JACKED / (1000)) * 100)}}%"></div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Blew Bank Vault 5 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->BLEW_VAULT > 5 ? 100 : round(($currentUser->BLEW_VAULT / (5)) * 100)}}%"></div>
+            </div>
+            <p>Blew Bank Vault 20 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->BLEW_VAULT > 20 ? 100 : round(($currentUser->BLEW_VAULT / (20)) * 100)}}%"></div>
+            </div>
+            <p>Blew Bank Vault 50 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->BLEW_VAULT > 50 ? 100 : round(($currentUser->BLEW_VAULT / (50)) * 100)}}%"></div>
+            </div>
+            <p>Blew Bank Vault 100 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->BLEW_VAULT > 100 ? 100 : round(($currentUser->BLEW_VAULT / (100)) * 100)}}%"></div>
+            </div>
+            <p>Blew Bank Vault 200 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->BLEW_VAULT > 200 ? 100 : round(($currentUser->BLEW_VAULT / (200)) * 100)}}%"></div>
+            </div>
+            <p>Blew Bank Vault 500 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->BLEW_VAULT > 500 ? 100 : round(($currentUser->BLEW_VAULT / (500)) * 100)}}%"></div>
+            </div>
+            <p>Blew Bank Vault 1000 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: {{$currentUser->BLEW_VAULT > 1000 ? 100 : round(($currentUser->BLEW_VAULT / (1000)) * 100)}}%"></div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Blew Jail Cells 5 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->BLEW_JAILS > 5 ? 100 : round(($currentUser->BLEW_JAILS/ (5)) * 100)}}%"></div>
+            </div>
+            <p>Blew Jail Cells 20 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->BLEW_JAILS > 20 ? 100 : round(($currentUser->BLEW_JAILS / (20)) * 100)}}%"></div>
+            </div>
+            <p>Blew Jail Cells 50 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->BLEW_JAILS > 50 ? 100 : round(($currentUser->BLEW_JAILS / (50)) * 100)}}%"></div>
+            </div>
+            <p>Blew Jail Cells 100 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->BLEW_JAILS > 100 ? 100 : round(($currentUser->BLEW_JAILS / (100)) * 100)}}%"></div>
+            </div>
+            <p>Blew Jail Cells 200 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->BLEW_JAILS > 200 ? 100 : round(($currentUser->BLEW_JAILS / (200)) * 100)}}%"></div>
+            </div>
+            <p>Blew Jail Cells 500 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->BLEW_JAILS > 500 ? 100 : round(($currentUser->BLEW_JAILS / (500)) * 100)}}%"></div>
+            </div>
+            <p>Blew Jail Cells 1000 Times</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" style="width: {{$currentUser->BLEW_JAILS > 500 ? 100 : round(($currentUser->BLEW_JAILS / (500)) * 100)}}%"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <p>Trucked 5 Cargo</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->TRUCKED > 5 ? 100 : round(($currentUser->TRUCKED/ (5)) * 100)}}%"></div>
+            </div>
+            <p>Trucked 20 Cargo</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->TRUCKED > 20 ? 100 : round(($currentUser->TRUCKED / (20)) * 100)}}%"></div>
+            </div>
+            <p>Trucked 50 Cargo</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->TRUCKED > 50 ? 100 : round(($currentUser->TRUCKED / (50)) * 100)}}%"></div>
+            </div>
+            <p>Trucked 100 Cargo</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->TRUCKED > 100 ? 100 : round(($currentUser->TRUCKED / (100)) * 100)}}%"></div>
+            </div>
+            <p>Trucked 200 Cargo</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->TRUCKED > 200 ? 100 : round(($currentUser->TRUCKED / (200)) * 100)}}%"></div>
+            </div>
+            <p>Trucked 500 Cargo</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->TRUCKED > 500 ? 100 : round(($currentUser->TRUCKED / (500)) * 100)}}%"></div>
+            </div>
+            <p>Trucked 1000 Cargo</p>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: {{$currentUser->TRUCKED > 500 ? 100 : round(($currentUser->TRUCKED / (500)) * 100)}}%"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@stop
