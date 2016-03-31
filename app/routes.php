@@ -23,7 +23,7 @@ Route::any('/dashboard', 				['as' => 'dashboard', 	'uses' => 'DashboardControll
 Route::any('/economics', 				['as' => 'economics', 	'uses' => 'EconomicsController@index']);
 
 // Signatures
-Route::get('/sig/{id}', 				'SignatureController@index');
+// Route::get('/sig/{id}', 				'SignatureController@index');
 
 // Help Centre
 Route::any('/help', 					['as' => 'help', 		'uses' => 'HelpController@index']);
