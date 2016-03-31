@@ -23,7 +23,7 @@ Route::any('/dashboard', 				['as' => 'dashboard', 	'uses' => 'DashboardControll
 Route::any('/economics', 				['as' => 'economics', 	'uses' => 'EconomicsController@index']);
 
 // Signatures
-// Route::get('/sig/{id}', 				'SignatureController@index');
+Route::get('/sig/{id}', 				'SignatureController@index');
 
 // Help Centre
 Route::any('/help', 					['as' => 'help', 		'uses' => 'HelpController@index']);
@@ -35,6 +35,7 @@ Route::post('/help/create', 			['as' => 'createtopic', 'uses' => 'HelpController
 Route::any('/achievements', 			['as' => 'achievements','uses' => 'PageController@achievements']);
 Route::any('/highscores', 				['as' => 'highscores', 	'uses' => 'PageController@highscores']);
 Route::any('/admins', 					['as' => 'admins', 		'uses' => 'PageController@admins']);
+Route::any('/seasonal', 				['as' => 'seasonal', 	'uses' => 'PageController@seasonal']);
 
 // Admin
 Route::any('/admin/stats', 				['as' => 'admin.stats', 'uses' => 'Admin\StatsController@index']);

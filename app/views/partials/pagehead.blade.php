@@ -12,4 +12,6 @@
 	@endif
 
 	<h1>{{$pageheadTitle or "Dashboard"}}</h1>
+
+	@yield ('page-heading')
 </div>

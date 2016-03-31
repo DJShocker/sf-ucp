@@ -54,7 +54,7 @@
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=lastip">Recent IP Address</a></th>
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=score">Score</a></th>
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=cash">On-Hand Money</a></th>
-	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=bankcash">Bank Money</a></th>
+	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=bankmoney">Bank Money</a></th>
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=xp">XP</a></th>
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=bounty">Current Bounty</a></th>
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=adminlevel">Admin level</a></th>
@@ -79,7 +79,7 @@
 			    </table>
 		    </div>
 
-			<div align="center">{{$users->appends(array('sort' => ($sort == "desc") ? "asc" : "desc", 'field' => strtolower($field) ))->links()}}</div>
+			<div align="center">{{$users->appends(array('sort' => ($sort == "desc") ? "asc" : "desc", 'field' => strtolower($field)))->links()}}</div>
 		</div>
 	</div>
 </div>

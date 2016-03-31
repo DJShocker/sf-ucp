@@ -134,6 +134,77 @@ class PageController extends BaseController{
                 ->with('breadCrumb',        ['Dashboard', 'Highscores'])
                 ->with('pageheadTitle',     'Highscores')
             , 200
-        );        
+        );
+    }
+
+
+    public function seasonal()
+    {
+        $currentUser = User::find(Session::get('UUID'));
+
+        if(!$currentUser) {
+            return App::abort('404');
+        }
+
+        $sort = "";
+
+        switch (Input::get("sort")) {
+            case "asc":
+                $sort .= "asc";
+                break;
+            case "desc":
+                $sort .= "desc";
+                break;
+            default:
+                $sort .= "desc";
+                break;
+        }
+
+        $inputField = Input::get("field");
+        $field = "";
+
+        switch ($inputField) {
+            case "name":
+                $field .= "NAME";
+                break;
+            case "score":
+                $field .= "SCORE";
+                break;
+            case "kills":
+                $field .= "KILL_STREAK";
+                break;
+            case "arrests":
+                $field .= "ARREST_STREAK";
+                break;
+            case "robbery":
+                $field .= "ROBBERY_STREAK";
+                break;
+            case "rank_s1":
+                $field .= "OLD_RANK";
+                break;
+            default:
+                $inputField = "rank";
+                $field .= "RANK";
+                break;
+        }
+
+        $players = User::select('USERS.*',  DB::raw('(SELECT `RANK` FROM `RANKS_S1` WHERE `RANKS_S1`.`USER_ID` = `USERS`.`ID`) as `OLD_RANK`'),
+                                            DB::raw('(SELECT `STREAK` FROM `STREAKS` WHERE `STREAKS`.`USER_ID` = `USERS`.`ID` AND `STREAKS`.`STREAK_ID`=0) as `ROBBERY_STREAK`'),
+                                            DB::raw('(SELECT `STREAK` FROM `STREAKS` WHERE `STREAKS`.`USER_ID` = `USERS`.`ID` AND `STREAKS`.`STREAK_ID`=1) as `ARREST_STREAK`'),
+                                            DB::raw('(SELECT `STREAK` FROM `STREAKS` WHERE `STREAKS`.`USER_ID` = `USERS`.`ID` AND `STREAKS`.`STREAK_ID`=2) as `KILL_STREAK`'))
+                        ->orderBy($field, $sort)->paginate(15);
+
+        $currentSort = ($sort == "desc") ? "asc" : "desc";
+
+        return Response::make(
+            View::make('seasonal.index')
+                ->with('currentUser',       $currentUser)
+                ->with( "players" ,         $players )
+                ->with( "sort",             $currentSort )
+                ->with( "field",            $inputField )
+                ->with('breadCrumb',        ['Dashboard', 'Seasonal'])
+                ->with('pageheadTitle',     'Season 2')
+            , 200
+        );
     }
 }

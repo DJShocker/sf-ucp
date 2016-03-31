@@ -4,6 +4,7 @@
 		<li @if(Request::is('economics')) class="active" @endif><a href="{{URL::route('economics')}}"><i class="fa fa-money"></i> <span>Economics</span></a></li>
 		<li @if(Request::is('help')) class="active" @endif><a href="{{URL::route('help')}}"><i class="fa fa-info-circle"></i> <span>Help Centre</span></a></li>
 		<li @if(Request::is('highscores')) class="active" @endif><a href="{{URL::route('highscores')}}"><i class="fa fa-trophy"></i> <span>Highscores</span></a></li>
+		<li @if(Request::is('seasonal')) class="active" @endif><a href="{{URL::route('seasonal')}}"><i class="fa fa-leaf"></i> <span>Seasonal</span></a></li>
 		<li @if(Request::is('achievements')) class="active" @endif><a href="{{URL::route('achievements')}}"><i class="fa fa-flag"></i> <span>Achievements</span></a></li>
 		<li><a href="https://kiwiirc.com/client/{{Config::get('irresistible.irc')}}/?nick={{$currentUser->NAME}}{{Config::get('irresistible.ircchan')}}" target="_blank"><i class="fa fa-comment"></i> <span>IRC</span></a></li>
 		<li @if(Request::is('admins')) class="active" @endif><a href="{{URL::route('admins')}}"><i class="fa fa-legal"></i> <span>Admins</span></a></li>
