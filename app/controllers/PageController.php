@@ -173,7 +173,7 @@ class PageController extends BaseController{
             case "kills":
                 $field .= "KILL_STREAK";
                 break;
-            case "arrests":
+            case "arrest":
                 $field .= "ARREST_STREAK";
                 break;
             case "robbery":
