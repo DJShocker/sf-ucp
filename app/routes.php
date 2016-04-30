@@ -13,6 +13,7 @@
 
 // Authentication
 Route::get('/', 						'AuthController@index');
+Route::get('/register', 				['as' => 'register', 	'uses' => 'AuthController@register']);
 Route::post('/auth/new', 				['as' => 'login', 		'uses' => 'AuthController@create']);
 Route::any('/auth/destroy', 			['as' => 'logout', 		'uses' => 'AuthController@destroy']);
 
@@ -34,6 +35,7 @@ Route::post('/help/create', 			['as' => 'createtopic', 'uses' => 'HelpController
 // Pages (not worthy of controller)
 Route::any('/achievements', 			['as' => 'achievements','uses' => 'PageController@achievements']);
 Route::any('/highscores', 				['as' => 'highscores', 	'uses' => 'PageController@highscores']);
+Route::any('/weapons', 					['as' => 'weapons', 	'uses' => 'PageController@weapons']);
 Route::any('/admins', 					['as' => 'admins', 		'uses' => 'PageController@admins']);
 Route::any('/seasonal', 				['as' => 'seasonal', 	'uses' => 'PageController@seasonal']);
 

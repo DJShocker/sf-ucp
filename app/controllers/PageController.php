@@ -207,4 +207,37 @@ class PageController extends BaseController{
             , 200
         );
     }
+
+    public function weapons()
+    {
+        $currentUser = User::find(Session::get('UUID'));
+
+        if ( ! $currentUser) {
+            return App::abort('404');
+        }
+
+        $weaponData = WeaponStats::whereValidWeapon()->where('USER_ID', $currentUser->ID)->orderBy('KILLS', 'desc')->get();
+
+        // Give suggestions
+        $weaponsToDo = [];
+
+        foreach (WeaponStats::$supportedWeaponId as $wep) {
+            if (in_array($wep, WeaponStats::$adminWeapons) && $currentUser->ADMINLEVEL < 1)
+                continue; // skip if admin level
+
+            if ( ! in_array($wep, $weaponData->lists('WEAPON_ID'))) {
+                array_push($weaponsToDo, WeaponStats::$weaponNames[$wep]);
+            }
+        }
+
+        return Response::make(
+            View::make('weapons.index')
+                ->with('currentUser',       $currentUser)
+                ->with('breadCrumb',        ['Dashboard', 'Weapon Statistics'])
+                ->with('pageheadTitle',     'Weapon Statistics')
+                ->with('weaponData',        $weaponData)
+                ->with('incompleteWeapons', implode(', ', $weaponsToDo))
+            , 200
+        );
+    }
 }

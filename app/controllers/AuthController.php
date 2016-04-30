@@ -15,6 +15,19 @@ class AuthController extends BaseController {
     }
 
     /**
+     * Default view handeling for /register
+     */
+    public function register()
+    {
+        if (Session::has('authenticated') && Session::get('authenticated')) {
+            return Redirect::to('/dashboard');
+        }
+
+        $serverPlayers = User::where('ONLINE', '>=', 1)->count('ID');
+        return Response::make(View::make('frontend.register')->with(compact('serverPlayers')), 200);
+    }
+
+    /**
      * Create new session
      */
     public function create()

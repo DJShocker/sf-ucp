@@ -50,7 +50,7 @@
 													$color = "red";
 												}
 
-												echo "<font style='color: {$color}'>{$carbonDate->toDayDateTimeString()}</font>";
+												echo "<font style='color: {$color}'>{$carbonDate->diffForHumans(null, true)}</font>";
 											?>
 										@endif
 									</td>

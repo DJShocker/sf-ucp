@@ -45,6 +45,11 @@
             {{Form::submit('Login', ['class'=>'btn btn-primary btn-block'])}}
           {{Form::close()}}
           <!-- End of login form -->
+
+          <div class="text-center" style="padding-top: 14px">
+            <a href="{{ route('register') }}" class="small">Create an account?</a>
+          </div>
+
         </div>
         <div class="panel-footer"> 
           <div class="text-center">&copy; IrresistibleGaming, 2011.</div>
