@@ -9,19 +9,19 @@ class CashStatsController extends \Controller {
     public function __construct() {
         // Constructor
     }
-    
+
     public function totalcash()
     {
 	 	$totalCash = \DB::table('STATS')->where('NAME', '=', 'totalcash')
-	 								   ->select( 
-	 								   		\DB::raw('unix_timestamp(`CREATED_AT`) as date'), 
+	 								   ->select(
+	 								   		\DB::raw('unix_timestamp(`CREATED_AT`) as date'),
 	 								   		'INT_VAL as cash'
 	 								   	)
 	 								   	->orderBy('CREATED_AT', 'desc')->limit(7)->remember(10)->get();
 
         if(!$totalCash)
             return \App::abort('500');
-        
+
 	    return $totalCash;
     }
 
@@ -48,6 +48,23 @@ class CashStatsController extends \Controller {
         catch(Exception $e)
         {
         	return \App::abort('500');
+        }
+    }
+
+    public function donorReset($apiKey)
+    {
+        if($apiKey != \Config::get('irresistible.api_key')){
+            return \App::abort('403');
+        }
+
+        try
+        {
+            \DB::statement('TRUNCATE TABLE `TOP_DONOR`');
+            return "Truncated donor statistics.";
+        }
+        catch(Exception $e)
+        {
+            return \App::abort('500');
         }
     }
 }

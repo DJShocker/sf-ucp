@@ -68,6 +68,7 @@ Route::api(['version' => 'v1', 'prefix' => 'api'], function()
 	// Cash Statistics
 	Route::get('/cashstats', 			'API\CashStatsController@totalcash');
 	Route::get('/cashstats/add/{key}',	'API\CashStatsController@create');
+	Route::get('/donor/reset/{key}',	'API\CashStatsController@donorReset');
 
 	// Transactions
 	Route::get('/transactions', 		'API\TransactionsController@transactions');
