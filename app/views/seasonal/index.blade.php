@@ -1,7 +1,7 @@
 @extends('layout/application')
 
 @section('page-heading')
-<h3 class="pull-right" style="padding-right: 48px">Your season 2 rank is <span class="text-success">{{RankS1::getIrresistibleRank($currentUser->RANK)}}</span>.</h3>
+<h3 class="pull-right" style="padding-right: 48px">Your season 3 rank is <span class="text-success">{{RankS1::getIrresistibleRank($currentUser->RANK)}}</span>.</h3>
 @stop
 
 @section('content')
