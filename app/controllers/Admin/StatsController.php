@@ -23,6 +23,7 @@ class StatsController extends BaseController{
                             ->orWhere(function($query) {
                                 $query->whereNull('DELETED')->where('NOTE', 'LIKE', '{CD7F32}%');
                             })
+                            ->has('user', 'author')
                             ->get();
 
         $registeredUsers = \User::count();

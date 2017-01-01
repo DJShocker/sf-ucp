@@ -126,8 +126,17 @@
                             <tr>
                                 <td>{{{$key->ID}}}</td>
                                 <td>{{{$key->TIME}}}</td>
-                                <td>{{{$key->user->NAME}}}</td>
-                                <td>{{{$key->author->NAME}}}</td>
+                                @if ($key->user)
+                                    <td>{{{$key->user->NAME}}}</td>
+                                @else
+                                    <td style="color: red"><strong>User Does Not Exist</strong></td>
+                                @endif
+
+                                @if ($key->author)
+                                    <td>{{{$key->author->NAME}}}</td>
+                                @else
+                                    <td style="color: red"><strong>Author Does Not Exist</strong></td>
+                                @endif
                                 <td>{{{preg_replace('/(?i){[a-f0-9]+}/', '', $key->NOTE)}}}</td>
                             </tr>
                         @endforeach

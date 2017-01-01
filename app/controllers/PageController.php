@@ -188,7 +188,7 @@ class PageController extends BaseController{
                 break;
         }
 
-        $players = User::select('USERS.*',  DB::raw('(SELECT `RANK` FROM `RANKS_S2` WHERE `RANKS_S2`.`USER_ID` = `USERS`.`ID`) as `OLD_RANK`'),
+        $players = User::select('USERS.*',  DB::raw('(SELECT `RANK` FROM `RANKS_S3` WHERE `RANKS_S3`.`USER_ID` = `USERS`.`ID`) as `OLD_RANK`'),
                                             DB::raw('(SELECT `STREAK` FROM `STREAKS` WHERE `STREAKS`.`USER_ID` = `USERS`.`ID` AND `STREAKS`.`STREAK_ID`=0) as `ROBBERY_STREAK`'),
                                             DB::raw('(SELECT `STREAK` FROM `STREAKS` WHERE `STREAKS`.`USER_ID` = `USERS`.`ID` AND `STREAKS`.`STREAK_ID`=1) as `ARREST_STREAK`'),
                                             DB::raw('(SELECT `STREAK` FROM `STREAKS` WHERE `STREAKS`.`USER_ID` = `USERS`.`ID` AND `STREAKS`.`STREAK_ID`=2) as `KILL_STREAK`'))
@@ -203,7 +203,7 @@ class PageController extends BaseController{
                 ->with( "sort",             $currentSort )
                 ->with( "field",            $inputField )
                 ->with('breadCrumb',        ['Dashboard', 'Seasonal'])
-                ->with('pageheadTitle',     'Season 3')
+                ->with('pageheadTitle',     'Season 4')
             , 200
         );
     }
