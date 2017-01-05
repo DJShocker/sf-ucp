@@ -31,7 +31,7 @@
                                     <td>{{$user->KILL_STREAK or 0}}</td>
                                     <td>{{$user->ARREST_STREAK or 0}}</td>
                                     <td>{{$user->ROBBERY_STREAK or 0}}</td>
-                                    <td>{{$user->OLD_RANK ? RankS1::getIrresistibleRank($user->OLD_RANK) : "<i>N/A</i>"}}</td>
+                                    <td>{{$user->OLD_RANK ? RankS1::getOldIrresistibleRank($user->OLD_RANK) : "<i>N/A</i>"}}</td>
                                 </tr>
                             @endforeach
                         </tr>
