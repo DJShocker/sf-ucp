@@ -18,6 +18,7 @@
                 <li @if(Request::is('admin/manage')) class="active" @endif><a href="{{URL::route('admin.manage')}}">Player Management</a></li>
                 <li @if(Request::is('admin/transactions')) class="active" @endif><a href="{{URL::route('admin.transactions')}}">Transaction Log</a></li>
                 <li @if(Request::is('admin/stats')) class="active" @endif><a href="{{URL::route('admin.stats')}}">Server Stats</a></li>
+                <li @if(Request::is('admin/feedback')) class="active" @endif><a href="{{URL::route('admin.feedback')}}">Feedback</a></li>
             </ul>
         </li>
   	@endif

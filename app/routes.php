@@ -41,6 +41,8 @@ Route::any('/seasonal', 				['as' => 'seasonal', 	'uses' => 'PageController@seas
 
 // Admin
 Route::any('/admin/stats', 				['as' => 'admin.stats', 'uses' => 'Admin\StatsController@index']);
+// Admin
+Route::any('/admin/feedback', 			['as' => 'admin.feedback', 'uses' => 'Admin\AdminController@feedback']);
 
 // Admin Cash Log
 Route::any('/admin/transactions/search',['as' => 'admin.trans.search', 'uses' => 'Admin\AdminController@transactionSearch']);
@@ -76,5 +78,6 @@ Route::api(['version' => 'v1', 'prefix' => 'api'], function()
 	// Player Data
 	Route::get('/player/record/{key}',	'API\PlayerController@record');
 	Route::get('/player/help/{id}', 	'API\PlayerController@article');
+	Route::get('/player/feedback/{id}',	'API\PlayerController@feedbackDestroy');
 	Route::get('/player/{id}/{name}',	'API\PlayerController@data');
 });

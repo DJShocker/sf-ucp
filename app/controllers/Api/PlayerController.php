@@ -69,4 +69,29 @@ class PlayerController extends \Controller {
             'arrests' => (int)$userData->ARRESTS
         ];
     }
+
+    public function feedbackDestroy($id)
+    {
+        $currentUser = \User::find(\Session::get('UUID'));
+
+        if(!$currentUser) {
+            return App::abort('404');
+        }
+
+        if($currentUser->ADMINLEVEL < 6) {
+            return $this->response->error('Unauthorized Access', 403);
+        }
+
+        $feedback = \Feedback::find($id);
+
+        if (is_null($feedback)) {
+            return $this->response->error('The feedback has not been found.', 404);
+        }
+
+        if ($feedback->delete()) {
+            return ['id' => $id, 'status' => 'deleted'];
+        } else {
+            return ['id' => $id, 'status' => 'undeleted'];
+        }
+    }
 }

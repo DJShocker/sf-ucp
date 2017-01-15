@@ -134,8 +134,8 @@ class AdminController extends BaseController{
         	"max" => \Input::get('score-max')
         ];
 
-        $cash = [ 
-        	"min" => \Input::get('cash-min'), 
+        $cash = [
+        	"min" => \Input::get('cash-min'),
         	"max" => \Input::get('cash-max')
         ];
 
@@ -163,9 +163,9 @@ class AdminController extends BaseController{
         {
     	   //if(!empty($userName))
            	$query->where( "NAME", "LIKE", "%".trim( strip_tags( $userName ) )."%" );
-                    
+
             // Only for USERS
-            if(!$table) 
+            if(!$table)
             {
                 if(!empty($score['min']))
                     $query = $query->having('SCORE', '>', $score['min']);
@@ -186,7 +186,7 @@ class AdminController extends BaseController{
 
         $query = $query->take(30)->get();
 
-     	return \Response::make( 
+     	return \Response::make(
      		\View::make('admin.results')
             	->with('currentUser',		$currentUser)
      			->with('users', 			$query)
@@ -275,6 +275,30 @@ class AdminController extends BaseController{
                 ->with('transactionsLog',   $transactionsLog)
                 ->with('breadCrumb',        ['Dashboard', 'Administration', 'Transaction Log'])
                 ->with('pageheadTitle',     'Search Transaction Log')
+        , 200 );
+    }
+
+
+    public function feedback()
+    {
+        $currentUser = \User::find(\Session::get('UUID'));
+
+        if(!$currentUser) {
+            return App::abort('404');
+        }
+
+        if($currentUser->ADMINLEVEL < 6) {
+            return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
+        }
+
+        $feedback = \Feedback::with(['user'])->orderBy('DATE', 'desc')->get();
+
+        return \Response::make(
+            \View::make('admin.feedback')
+                ->with('currentUser', $currentUser)
+                ->with('feedback', $feedback)
+                ->with('breadCrumb',        ['Dashboard', 'Administration', 'Feedback'])
+                ->with('pageheadTitle',     'Feedback')
         , 200 );
     }
 }
