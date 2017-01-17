@@ -79,5 +79,6 @@ Route::api(['version' => 'v1', 'prefix' => 'api'], function()
 	Route::get('/player/record/{key}',	'API\PlayerController@record');
 	Route::get('/player/help/{id}', 	'API\PlayerController@article');
 	Route::get('/player/feedback/{id}',	'API\PlayerController@feedbackDestroy');
+	Route::get('/players',				'API\PlayerController@totalPlayers');
 	Route::get('/player/{id}/{name}',	'API\PlayerController@data');
 });

@@ -94,4 +94,10 @@ class PlayerController extends \Controller {
             return ['id' => $id, 'status' => 'undeleted'];
         }
     }
+
+    public function totalPlayers()
+    {
+        $totalPlayers = \User::where('ONLINE', '>=', 1)->count('ONLINE');
+        return ['players' => $totalPlayers];
+    }
 }
