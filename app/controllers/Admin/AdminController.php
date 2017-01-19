@@ -301,4 +301,75 @@ class AdminController extends BaseController{
                 ->with('pageheadTitle',     'Feedback')
         , 200 );
     }
+
+    public function adminLogs()
+    {
+        $currentUser = \User::find(\Session::get('UUID'));
+
+        if(!$currentUser) {
+            return App::abort('404');
+        }
+
+        if($currentUser->ADMINLEVEL < 6) {
+            return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
+        }
+
+        $adminLogs = \AdminActionLog::with(['user'])->orderBy('DATE', 'desc')->paginate(20);
+
+        return \Response::make(
+            \View::make('admin.logs')
+                ->with('currentUser', $currentUser)
+                ->with('adminLogs', $adminLogs)
+                ->with('breadCrumb',        ['Dashboard', 'Administration', 'Admin Logs'])
+                ->with('pageheadTitle',     'Admin Logs')
+        , 200 );
+    }
+
+    public function searchAdminLogs()
+    {
+        $currentUser = \User::find(\Session::get('UUID'));
+
+        if (!$currentUser) {
+            return App::abort('404');
+        }
+
+        if ($currentUser->ADMINLEVEL < 6) {
+            return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
+        }
+
+        $adminLogs = \AdminActionLog::with(['user']);
+
+        // search username
+        if (\Input::has('username') == true) {
+            $user = \User::where('NAME', '=', \Input::get('username'))->select('ID')->first();
+
+            if (is_null($user) == false)
+                $adminLogs = $adminLogs->where('USER_ID', '=', $user->ID);
+        }
+
+        // search action
+        if (\Input::has('action') == true) {
+            $adminLogs = $adminLogs->where('ACTION', 'LIKE', '%' . \Input::get('action') . '%');
+        }
+
+        // before date
+        if (\Input::has('beforeDate') == true) {
+            $adminLogs = $adminLogs->where('DATE', '<=', \Input::get('beforeDate'));
+        }
+
+        // after date
+        if (\Input::has('fromDate') == true) {
+            $adminLogs = $adminLogs->where('DATE', '>=', \Input::get('fromDate'));
+        }
+
+        $adminLogs = $adminLogs->orderBy('DATE', 'desc')->paginate(20);
+
+        return \Response::make(
+            \View::make('admin.logs_show')
+                ->with('currentUser', $currentUser)
+                ->with('adminLogs', $adminLogs)
+                ->with('breadCrumb',        ['Dashboard', 'Administration', 'Admin Logs'])
+                ->with('pageheadTitle',     'Admin Logs')
+        , 200 );
+    }
 }

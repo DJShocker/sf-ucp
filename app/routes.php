@@ -52,6 +52,10 @@ Route::any('/admin/transactions', 		['as' => 'admin.transactions', 'uses' => 'Ad
 Route::post('/admin/search/post', 		['as' => 'admin.player.search','uses' => 'Admin\AdminController@search']);
 Route::any('/admin/search', 			['as' => 'admin.search','uses' => 'Admin\AdminController@index']);
 
+// Admin Log
+Route::post('/admin/logs/search/post', 	['as' => 'admin.log.search','uses' => 'Admin\AdminController@searchAdminLogs']);
+Route::get('/admin/logs/search', 		['as' => 'admin.logs','uses' => 'Admin\AdminController@adminLogs']);
+
 // Admin - Player Manage
 Route::any('/admin/manage', 			['as' => 'admin.manage','uses' => 'Admin\PlayerController@index']);
 Route::post('/admin/manage/ban', 		['as' => 'ban', 		'uses' => 'Admin\PlayerController@ban']);

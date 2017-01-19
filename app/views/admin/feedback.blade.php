@@ -24,7 +24,7 @@
                 		<td style="color: red; font-weight: 400">Not Found</td>
                 		<td style="color: red; font-weight: 400">n/a</td>
                 		@endif
-                		<td>{{ $key->FEEDBACK }}</td>
+                		<td>{{{ $key->FEEDBACK }}}</td>
                 		<td>{{ $key->DATE->diffForHumans() }}
                 		<td><a href="#" data-url="/api/player/feedback/{{ $key->ID }}" class="destroyFeedback">Delete</a></td>
                 	</td>
@@ -43,20 +43,19 @@
 <script type="text/javascript">
 	$('.destroyFeedback').click(function (e) {
 		e.preventDefault();
+		$(this).closest('tr').fadeOut(1000);
 
-		if (window.confirm("Are you sure that you wish to remove this feedback?"))
-		{
+		//if (window.confirm("Are you sure that you wish to remove this feedback?")) {
 	    	var like = $.ajax($(this).data('url')).done(function()
 	    	{
 	        	var data = $.parseJSON(like['responseText']);
 
-	        	if (data.status == "deleted") {
-	        		$("tr[id=" + data.id +"]").remove();
-	        	} else {
+	        	if (data.status != "deleted") {
 	        		alert("Couldn't delete feedback. Refresh page.");
+	  				$("tr[id=" + data.id +"]").fadeIn();
 	        	}
 	    	});
-	    }
+	    //}
 	});
 </script>
 @stop
