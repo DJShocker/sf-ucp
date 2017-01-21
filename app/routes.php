@@ -56,6 +56,9 @@ Route::any('/admin/search', 			['as' => 'admin.search','uses' => 'Admin\AdminCon
 Route::post('/admin/logs/search/post', 	['as' => 'admin.log.search','uses' => 'Admin\AdminController@searchAdminLogs']);
 Route::get('/admin/logs/search', 		['as' => 'admin.logs','uses' => 'Admin\AdminController@adminLogs']);
 
+// House Taxes
+Route::any('/admin/taxes/mapping', 		['as' => 'admin.taxes','uses' => 'Admin\StatsController@mappingTaxes']);
+
 // Admin - Player Manage
 Route::any('/admin/manage', 			['as' => 'admin.manage','uses' => 'Admin\PlayerController@index']);
 Route::post('/admin/manage/ban', 		['as' => 'ban', 		'uses' => 'Admin\PlayerController@ban']);
@@ -72,8 +75,8 @@ Route::post('/admin/manage/mute', 		['as' => 'mute', 		'uses' => 'Admin\PlayerCo
 Route::api(['version' => 'v1', 'prefix' => 'api'], function()
 {
 	// Cash Statistics
-	Route::get('/cashstats', 			'API\CashStatsController@totalcash');
-	Route::get('/cashstats/add/{key}',	'API\CashStatsController@create');
+	Route::any('/cashstats', 			'API\CashStatsController@totalcash');
+	Route::any('/cashstats/add/{key}',	'API\CashStatsController@create');
 	Route::get('/donor/reset/{key}',	'API\CashStatsController@donorReset');
 
 	// Transactions

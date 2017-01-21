@@ -53,4 +53,35 @@ class StatsController extends BaseController{
                 ->with('pageheadTitle',     'Server Statistics')
         , 200 );
     }
+
+
+    public function mappingTaxes()
+    {
+        $currentUser = \User::find(\Session::get('UUID'));
+
+        if (!$currentUser) {
+            return App::abort('404');
+        }
+
+        if ($currentUser->ID < 6 && $currentUser->ID != 1) {
+            return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
+        }
+
+        $today = \Carbon\Carbon::today();
+        $yesterday = \Carbon\Carbon::yesterday();
+
+        $mapTaxReceiptsDay = \MapTaxReceipts::where('DATE', '>', [$yesterday->toDateString(), $today->toDateString()])->get();
+        $mapTaxReceiptsWeek = \MapTaxReceipts::with('user')->whereBetween('DATE', [$today->startOfWeek()->toDateString(), $today->endOfWeek()->toDateString()])->orderBy('DATE', 'DESC')->get();
+        $mapTaxReceiptsMonth = \MapTaxReceipts::whereBetween('DATE', [$today->startOfMonth()->toDateString(), $today->endOfMonth()->toDateString()])->get();
+
+        $mapTaxes = \MapTax::with('user')->whereRaw('`RENEWAL_TIMESTAMP` - UNIX_TIMESTAMP() < 2592000')->orderBy('RENEWAL_TIMESTAMP', 'ASC')->get();
+
+        return \Response::make(
+            \View::make('admin.taxes')
+                ->with(compact('mapTaxes', 'mapTaxReceiptsDay', 'mapTaxReceiptsWeek', 'mapTaxReceiptsMonth'))
+                ->with('currentUser',       $currentUser)
+                ->with('breadCrumb',        ['Dashboard', 'Administration', 'Mapping Taxes'])
+                ->with('pageheadTitle',     'Mapping Taxes')
+        , 200 );
+    }
 }

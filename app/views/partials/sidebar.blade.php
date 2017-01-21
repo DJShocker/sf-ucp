@@ -20,6 +20,7 @@
                 <li @if(Request::is('admin/stats')) class="active" @endif><a href="{{URL::route('admin.stats')}}">Server Stats</a></li>
                 <li @if(Request::is('admin/feedback')) class="active" @endif><a href="{{URL::route('admin.feedback')}}">Feedback</a></li>
                 <li @if(Request::is('admin/logs')) class="active" @endif><a href="{{URL::route('admin.logs')}}">Admin Logs</a></li>
+                <li @if(Request::is('admin/taxes')) class="active" @endif><a href="{{URL::route('admin.taxes')}}">Mapping Taxes</a></li>
             </ul>
         </li>
   	@endif
