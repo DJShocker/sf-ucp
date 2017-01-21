@@ -55,7 +55,7 @@
                             @if($currentUser->VIP_PACKAGE)
                                 <div class="text-center">{{Gliee\Irresistible\Utils::vipToString($currentUser->VIP_PACKAGE)}}</div>
                                 <small>Expires {{$vipExpiry or 'Never'}}</small>
-                            @else                            
+                            @else
                                 <div class="text-center">None :(</div>
                                 <small>No VIP Active</small>
                             @endif
@@ -140,7 +140,7 @@
                                 <td>VIP Job</td>
                                 <td>
                                     @if ($currentUser->VIP_PACKAGE <= 0)
-                                        <a href="//donate.irresistiblegaming.com">You are not a VIP, become one today!</a> 
+                                        <a href="//donate.irresistiblegaming.com">You are not a VIP, become one today!</a>
                                     @else
                                         {{Gliee\Irresistible\Utils::skillToString($currentUser->VIP_JOB)}}</td>
                                     @endif
@@ -309,5 +309,5 @@
 <script type='text/javascript' src='assets/plugins/charts-flot/jquery.flot.min.js'></script>
 <script type='text/javascript' src='assets/plugins/charts-flot/jquery.flot.resize.min.js'></script>
 <script type='text/javascript' src='assets/plugins/charts-flot/jquery.flot.time.min.js'></script>
-<script type='text/javascript' src='assets/js/flotgraph.js'></script>
+<script type='text/javascript' src='assets/js/economics-flotgraph.js'></script>
 @stop

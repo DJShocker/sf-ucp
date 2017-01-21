@@ -120,10 +120,10 @@
 @stop
 
 @section('jscontent')
-<script type='text/javascript' src='{{URL::to('/')}}/assets/plugins/charts-flot/jquery.flot.min.js'></script> 
+<script type='text/javascript' src='{{URL::to('/')}}/assets/plugins/charts-flot/jquery.flot.min.js'></script>
 <script type='text/javascript' src='{{URL::to('/')}}/assets/plugins/charts-flot/jquery.flot.resize.min.js'></script>
-<script type='text/javascript' src='{{URL::to('/')}}/assets/plugins/charts-flot/jquery.flot.time.min.js'></script> 
+<script type='text/javascript' src='{{URL::to('/')}}/assets/plugins/charts-flot/jquery.flot.time.min.js'></script>
 <script type="text/javascript" src="{{URL::to('/')}}/assets/js/angular.min.js"></script>
-<script type='text/javascript' src='{{URL::to('/')}}/assets/js/flotgraph.js'></script>
+<script type='text/javascript' src='{{URL::to('/')}}/assets/js/economics-flotgraph.js'></script>
 <script type='text/javascript' src='{{URL::to('/')}}/assets/js/angularlive.js'></script>
 @stop

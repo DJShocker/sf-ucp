@@ -17,7 +17,7 @@ class CashStatsController extends \Controller {
 	 								   		\DB::raw('unix_timestamp(`CREATED_AT`) as date'),
 	 								   		'INT_VAL as cash'
 	 								   	)
-	 								   	->orderBy('CREATED_AT', 'desc')->limit(7)->remember(10)->get();
+	 								   	->orderBy('CREATED_AT', 'desc')->limit(30)->get();
 
         if(!$totalCash)
             return \App::abort('500');
@@ -36,6 +36,10 @@ class CashStatsController extends \Controller {
         if(is_null($totalCash))
         	return \App::abort('500');
 
+        // make sure its not inserted again for a while
+        if (\Session::get('inserted') > time())
+            return ['message' => 'Must wait before inserting a new entry again.'];
+
         try
         {
 	        $entry 			= new \Stats;
@@ -43,11 +47,12 @@ class CashStatsController extends \Controller {
 	        $entry->INT_VAL = $totalCash->TOTAL_CASH;
 	 		$entry->save();
 
-            return \Response::json(["message" => "A new entry has been successfully implemented."]);
+            \Session::put('inserted', time() + 60);
+            return ["message" => "A new entry has been successfully implemented."];
         }
         catch(Exception $e)
         {
-        	return \App::abort('500');
+        	return $e;
         }
     }
 
