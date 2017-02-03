@@ -63,7 +63,7 @@ class StatsController extends BaseController{
             return App::abort('404');
         }
 
-        if ($currentUser->ID < 6 && $currentUser->ID != 1) {
+        if ($currentUser->ADMINLEVEL < 6) {
             return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
         }
 
