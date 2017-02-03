@@ -5,11 +5,21 @@
 		<li @if(Request::is('help')) class="active" @endif><a href="{{URL::route('help')}}"><i class="fa fa-info-circle"></i> <span>Help Centre</span></a></li>
 		<li @if(Request::is('highscores')) class="active" @endif><a href="{{URL::route('highscores')}}"><i class="fa fa-trophy"></i> <span>Highscores</span></a></li>
 		<li @if(Request::is('seasonal')) class="active" @endif><a href="{{URL::route('seasonal')}}"><i class="fa fa-leaf"></i> <span>Seasonal</span></a></li>
+
+		<li class="closed hasChild {{Request::is('gangs/*') ? 'open active' : ''}} "><a href="javascript:;"><i class="fa fa-group"></i> <span>Gangs <span class="label label-info" style="margin-left: 9em">BETA</span></a>
+            <ul class="acc-menu" style="display: none;">
+                <li @if(Request::is('gangs/highscores')) class="active" @endif><a href="{{URL::route('gangs.highscores')}}">Highscores</a></li>
+                @if ($currentUser->gang)
+                	<li @if(Request::is('gangs/*/')) class="active" @endif><a href="{{ $currentUser->gang->url() }}">View Gang</a></li>
+                @endif
+            </ul>
+        </li>
 		<li @if(Request::is('weapons')) class="active" @endif><a href="{{URL::route('weapons')}}"><i class="fa fa-bullseye"></i> <span>Weapon Statistics</span></a></li>
 		<li @if(Request::is('achievements')) class="active" @endif><a href="{{URL::route('achievements')}}"><i class="fa fa-flag"></i> <span>Achievements</span></a></li>
-		<li><a href="https://kiwiirc.com/client/{{Config::get('irresistible.irc')}}/?nick={{$currentUser->NAME}}{{Config::get('irresistible.ircchan')}}" target="_blank"><i class="fa fa-comment"></i> <span>IRC</span></a></li>
+
+		<li><a href="https://discord.gg/bqJxheP" target="_blank"><i class="fa fa-comment"></i> <span>Discord</span></a></li>
 		<li @if(Request::is('admins')) class="active" @endif><a href="{{URL::route('admins')}}"><i class="fa fa-legal"></i> <span>Admins</span></a></li>
-		<li><a href="http://forum.irresistiblegaming.com" target="_blank"><i class="fa fa-group"></i> <span>Forums</span></a></li>
+		<li><a href="http://forum.irresistiblegaming.com" target="_blank"><i class="fa fa-comments"></i> <span>Forums</span></a></li>
 
 	@if($currentUser->ADMINLEVEL)
 		<li class="closed hasChild {{Request::is('admin/*') ? 'open active' : ''}} "><a href="javascript:;"><i class="fa fa-cogs"></i> <span>Administration</span></a>

@@ -3,7 +3,7 @@
 	<ol class="breadcrumb">
 		@foreach($breadCrumb as $index => $key)
 			@if(!$index)
-				<li class="active"><a href="/{{strtolower($key)}}">{{$key}}</a></li>
+				<li class="active">{{$key}}</li>
 			@else
 				<li>{{$key}}</li>
 			@endif

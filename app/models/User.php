@@ -25,4 +25,8 @@ class User extends Eloquent{
     public function adminlog() {
         return $this->hasMany('AdminLog', 'USER_ID')->orderBy('DATE', 'desc');
     }
+
+    public function gang() {
+        return $this->belongsTo('Gang', 'GANG_ID', 'ID');
+    }
 }

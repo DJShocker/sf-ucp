@@ -39,6 +39,11 @@ Route::any('/weapons', 					['as' => 'weapons', 	'uses' => 'PageController@weapo
 Route::any('/admins', 					['as' => 'admins', 		'uses' => 'PageController@admins']);
 Route::any('/seasonal', 				['as' => 'seasonal', 	'uses' => 'PageController@seasonal']);
 
+// Gang pages
+Route::any('/gangs/highscores', 		['as' => 'gangs.highscores', 	'uses' => 'GangController@highscores']);
+Route::any('/gangs/{id}/kick/{user}',	['as' => 'gangs.kick', 	 		'uses' => 'GangController@kick']);
+Route::any('/gangs/{id}/{name}',		['as' => 'gangs.show', 	 		'uses' => 'GangController@show']);
+
 // Admin
 Route::any('/admin/stats', 				['as' => 'admin.stats', 'uses' => 'Admin\StatsController@index']);
 // Admin
