@@ -50,7 +50,8 @@ Route::any('/admin/stats', 				['as' => 'admin.stats', 'uses' => 'Admin\StatsCon
 Route::any('/admin/feedback', 			['as' => 'admin.feedback', 'uses' => 'Admin\AdminController@feedback']);
 
 // Admin Cash Log
-Route::any('/admin/transactions/search',['as' => 'admin.trans.search', 'uses' => 'Admin\AdminController@transactionSearch']);
+Route::any('/admin/transactions/player/search',		['as' => 'admin.trans.player.search', 'uses' => 'Admin\AdminController@playerTransactionSearch']);
+Route::any('/admin/transactions/gang/search',		['as' => 'admin.trans.gang.search', 'uses' => 'Admin\AdminController@gangTransactionSearch']);
 Route::any('/admin/transactions', 		['as' => 'admin.transactions', 'uses' => 'Admin\AdminController@transaction']);
 
 // Admin - Player Search

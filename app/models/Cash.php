@@ -17,4 +17,8 @@ class Cash extends Eloquent{
     public function fromUser() {
     	return $this->belongsTo('User', 'FROM_ID', 'ID');
     }
+
+    public function fromGang() {
+        return $this->belongsTo('Gang', 'FROM_ID', 'ID');
+    }
 }

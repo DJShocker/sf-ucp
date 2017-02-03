@@ -47,7 +47,7 @@
                                 <td>{{ number_format($gang->DEATHS) }}</td>
                             </tr>
                             <tr>
-                                <td>Private <small>(joinable through leaders)</small></td>
+                                <td>Private <small>(joinable through leaders only)</small></td>
                                 <td>{{ $gang->INVITE_ONLY ? "Yes" : "No" }}</td>
                             </tr>
                             <tr>
@@ -116,7 +116,9 @@
                             @endif
                             </tr>
                             @empty
-                            empty
+                            <tr>
+                                <td colspan="5" class="text-center">Nothing to show</td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>

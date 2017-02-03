@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-2">
-            {{Form::open(array('route' => 'admin.trans.search', 'method' => 'POST'))}}
+            {{Form::open(array('route' => 'admin.trans.player.search', 'method' => 'POST'))}}
             	<h3>Search Transaction Log</h3>
 
 				<div class="form-group">
@@ -35,6 +35,9 @@
 	                        <th>To Name</th>
 	                        <th>From Name</th>
 	                        <th>Amount</th>
+	                   	@if ($cashNature)
+	                        <th>Nature</th>
+	                    @endif
 	                        <th>Date</th>
 					    </tr>
 				    </thead>
@@ -45,6 +48,9 @@
 		                	<td>{{$key->toUser->NAME or "<i>Invalid User</i>"}}</td>
 		                	<td>{{$key->fromUser->NAME or "<i>Invalid User</i>"}}</td>
 		                	<td>{{isset($key->CASH) ? '$' . number_format($key->CASH) : $key->IC}}</td>
+		                @if ($cashNature)
+		                	<td>{{{$key->NATURE}}}</td>
+		                @endif
 		                	<td>{{$key->DATE}}</td>
 		                </tr>
 		          	@empty

@@ -26,7 +26,8 @@
             <ul class="acc-menu" style="display: none;">
                 <li @if(Request::is('admin/search')) class="active" @endif><a href="{{URL::route('admin.search')}}">Search Account</a></li>
                 <li @if(Request::is('admin/manage')) class="active" @endif><a href="{{URL::route('admin.manage')}}">Player Management</a></li>
-                <li @if(Request::is('admin/transactions')) class="active" @endif><a href="{{URL::route('admin.transactions')}}">Transaction Log</a></li>
+                <li @if(Request::is('admin/transactions')) class="active" @endif><a href="{{URL::route('admin.transactions')}}">Transaction Log
+                <span class="label label-info" style="margin-left: 4.5em">NEW</span></a></li><!-- destroy label soon -->
                 <li @if(Request::is('admin/stats')) class="active" @endif><a href="{{URL::route('admin.stats')}}">Server Stats</a></li>
                 <li @if(Request::is('admin/feedback')) class="active" @endif><a href="{{URL::route('admin.feedback')}}">Feedback</a></li>
                 <li @if(Request::is('admin/logs')) class="active" @endif><a href="{{URL::route('admin.logs')}}">Admin Logs</a></li>

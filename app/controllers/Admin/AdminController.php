@@ -15,10 +15,15 @@ class AdminController extends BaseController{
         "recent" 	=> 	"boolean"
     ];
 
-    static $searchTransactionRules = [
+    static $playerSearchTransactionRules = [
         "searchType" =>  "required|integer|between:0,1",
         "toName"     =>  "string|min:2|max:24|exists:USERS,NAME",
         "fromName"   =>  "string|min:2|max:24|exists:USERS,NAME"
+    ];
+
+    static $gangSearchTransactionRules = [
+        "username"   =>  "string|min:2|max:24|exists:USERS,NAME",
+        "gangname"   =>  "string|min:2|max:32|exists:GANGS,NAME"
     ];
 
     static $banRules = [
@@ -36,11 +41,11 @@ class AdminController extends BaseController{
     {
         $currentUser = \User::find(\Session::get('UUID'));
 
-        if(!$currentUser) {
+        if (!$currentUser) {
             return App::abort('404');
         }
 
-        if($currentUser->ADMINLEVEL < \Config::get('irresistible.search'))
+        if ($currentUser->ADMINLEVEL < \Config::get('irresistible.search'))
             return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
 
         $field = "";
@@ -110,16 +115,16 @@ class AdminController extends BaseController{
     {
         $currentUser = \User::find(\Session::get('UUID'));
 
-        if(!$currentUser) {
+        if (!$currentUser) {
             return App::abort('404');
         }
 
-        if($currentUser->ADMINLEVEL < \Config::get('irresistible.search'))
+        if ($currentUser->ADMINLEVEL < \Config::get('irresistible.search'))
             return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
 
       	$validation = \Validator::make(\Input::all(), static::$searchRules);
 
-        if($validation->fails())
+        if ($validation->fails())
         {
           	return \Redirect::to('/admin/search')->withErrors($validation);
         }
@@ -150,7 +155,7 @@ class AdminController extends BaseController{
                 break;
         }
 
-        if(\Input::has('name') && \Input::has('ip'))
+        if (\Input::has('name') && \Input::has('ip'))
         {
           	return \Redirect::to('/admin/search')->withErrors(['One name or IP is required only for a query. Not both.']);
         }
@@ -158,28 +163,28 @@ class AdminController extends BaseController{
 
       	$query = \DB::table($tableSelection);
 
-        if( \Input::has("ip") ) $query = $query->where( "IP", "LIKE", trim( strip_tags( $ipAddress ) )."%" );
+        if ( \Input::has("ip") ) $query = $query->where( "IP", "LIKE", trim( strip_tags( $ipAddress ) )."%" );
         else
         {
-    	   //if(!empty($userName))
+    	   //if (!empty($userName))
            	$query->where( "NAME", "LIKE", "%".trim( strip_tags( $userName ) )."%" );
 
             // Only for USERS
-            if(!$table)
+            if (!$table)
             {
-                if(!empty($score['min']))
+                if (!empty($score['min']))
                     $query = $query->having('SCORE', '>', $score['min']);
 
-                if(!empty($score['max']))
+                if (!empty($score['max']))
                     $query = $query->having('SCORE', '<', $score['max']);
 
-                if(!empty($cash['min']))
+                if (!empty($cash['min']))
                     $query = $query->having('CASH', '>', $cash['min']);
 
-                if(!empty($cash['max']))
+                if (!empty($cash['max']))
                     $query = $query->having('CASH', '<', $cash['max']);
 
-                if($recentOrder)
+                if ($recentOrder)
                     $query = $query->orderBy('ID', 'desc');
             }
         }
@@ -203,42 +208,41 @@ class AdminController extends BaseController{
     {
         $currentUser = \User::find(\Session::get('UUID'));
 
-        if(!$currentUser) {
+        if (!$currentUser) {
             return App::abort('404');
         }
 
-        if($currentUser->ADMINLEVEL < \Config::get('irresistible.search')) {
+        if ($currentUser->ADMINLEVEL < \Config::get('irresistible.search')) {
             return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
         }
 
         return \Response::make(
-            \View::make('admin.transactions')
+            \View::make('admin.transactions.index')
                 ->with('currentUser',       $currentUser)
                 ->with('breadCrumb',        ['Dashboard', 'Administration', 'Transaction Log'])
                 ->with('pageheadTitle',     'Search Transaction Log')
         , 200 );
     }
 
-
-    public function transactionSearch()
+    public function playerTransactionSearch()
     {
         $currentUser = \User::find(\Session::get('UUID'));
 
-        if(!$currentUser) {
+        if (!$currentUser) {
             return App::abort('404');
         }
 
-        if($currentUser->ADMINLEVEL < \Config::get('irresistible.search')) {
+        if ($currentUser->ADMINLEVEL < \Config::get('irresistible.search')) {
             return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
         }
 
-        $validation = \Validator::make(\Input::all(), static::$searchTransactionRules);
+        $validation = \Validator::make(\Input::all(), static::$playerSearchTransactionRules);
 
-        if($validation->fails()) {
+        if ($validation->fails()) {
             return \Redirect::to('/admin/transactions')->withInput(\Input::all())->withErrors($validation);
         }
 
-        if(\Input::has('toName') == false && \Input::has('fromName') == false) {
+        if (\Input::has('toName') == false && \Input::has('fromName') == false) {
             return \Redirect::to('/admin/transactions')->withInput(\Input::all())->withErrors(['There must be either to or from username specified.']);
         }
 
@@ -246,48 +250,102 @@ class AdminController extends BaseController{
         $toData = null;
         $fromData = null;
 
-        if(\Input::has('toName') == true) {
+        if (\Input::has('toName') == true) {
             $toData = \User::where('NAME', '=', \Input::get('toName'))->first();
         }
 
-        if(\Input::has('fromName') == true) {
+        if (\Input::has('fromName') == true) {
             $fromData = \User::where('NAME', '=', \Input::get('fromName'))->first();
         }
 
         // Search type
-        if(\Input::get('searchType') == 0) {
-            $transactionsLog = \Cash::orderBy('DATE', 'desc');
+        if (\Input::get('searchType') == 0) {
+            $transactionsLog = \Cash::whereNotIn('NATURE', ['gang withdraw', 'gang deposit'])->orderBy('DATE', 'desc');
         } else {
             $transactionsLog = \Coins::orderBy('DATE', 'desc');
         }
 
-        if(is_null($toData) == false)
+        if (is_null($toData) == false)
             $transactionsLog = $transactionsLog->where('TO_ID', '=', $toData->ID);
 
-        if(is_null($fromData) == false)
+        if (is_null($fromData) == false)
             $transactionsLog = $transactionsLog->where('FROM_ID', '=', $fromData->ID);
 
         $transactionsLog = $transactionsLog->paginate(20);
 
         return \Response::make(
-            \View::make('admin.transactions_show')
+            \View::make('admin.transactions.player')
                 ->with('currentUser',       $currentUser)
+                ->with('cashNature',        \Input::get('searchType') == 0)
                 ->with('transactionsLog',   $transactionsLog)
-                ->with('breadCrumb',        ['Dashboard', 'Administration', 'Transaction Log'])
-                ->with('pageheadTitle',     'Search Transaction Log')
+                ->with('breadCrumb',        ['Dashboard', 'Administration', 'Player Transaction Log'])
+                ->with('pageheadTitle',     'Search Player Transaction Log')
         , 200 );
     }
 
+    public function gangTransactionSearch()
+    {
+        $currentUser = \User::find(\Session::get('UUID'));
+
+        if (!$currentUser) {
+            return App::abort('404');
+        }
+
+        if ($currentUser->ADMINLEVEL < \Config::get('irresistible.search')) {
+            return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
+        }
+
+        $validation = \Validator::make(\Input::all(), static::$gangSearchTransactionRules);
+
+        if ($validation->fails()) {
+            return \Redirect::to('/admin/transactions')->withInput(\Input::all())->withErrors($validation);
+        }
+
+        if (\Input::has('gangname') == false && \Input::has('username') == false) {
+            return \Redirect::to('/admin/transactions')->withInput(\Input::all())->withErrors(['There must be either to or from username specified.']);
+        }
+
+        $userData = null;
+        $gangData = null;
+
+        // Get fields
+        if (\Input::has('username') == true) {
+            $userData = \User::where('NAME', '=', \Input::get('username'))->first();
+        }
+
+        // Get fields
+        if (\Input::has('gangname') == true) {
+            $gangData = \Gang::where('NAME', '=', \Input::get('gangname'))->first();
+        }
+
+        $transactionsLog = \Cash::with('fromGang', 'toUser')->whereIn('NATURE', ['gang withdraw', 'gang deposit'])->orderBy('DATE', 'desc');
+
+        if (is_null($userData) == false)
+            $transactionsLog = $transactionsLog->where('TO_ID', '=', $userData->ID);
+
+        if (is_null($gangData) == false)
+            $transactionsLog = $transactionsLog->where('FROM_ID', '=', $gangData->ID);
+
+        $transactionsLog = $transactionsLog->paginate(20);
+
+        return \Response::make(
+            \View::make('admin.transactions.gang')
+                ->with('currentUser',       $currentUser)
+                ->with('transactionsLog',   $transactionsLog)
+                ->with('breadCrumb',        ['Dashboard', 'Administration', 'Gang Transaction Log'])
+                ->with('pageheadTitle',     'Search Gang Transaction Log')
+        , 200 );
+    }
 
     public function feedback()
     {
         $currentUser = \User::find(\Session::get('UUID'));
 
-        if(!$currentUser) {
+        if (!$currentUser) {
             return App::abort('404');
         }
 
-        if($currentUser->ADMINLEVEL < 6) {
+        if ($currentUser->ADMINLEVEL < 6) {
             return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
         }
 
@@ -306,11 +364,11 @@ class AdminController extends BaseController{
     {
         $currentUser = \User::find(\Session::get('UUID'));
 
-        if(!$currentUser) {
+        if (!$currentUser) {
             return App::abort('404');
         }
 
-        if($currentUser->ADMINLEVEL < 6) {
+        if ($currentUser->ADMINLEVEL < 6) {
             return \Redirect::to('/dashboard')->withErrors(["You don't have permission to access this page."]);
         }
 
