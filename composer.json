@@ -1,7 +1,8 @@
 {
 	"require": {
 		"laravel/framework": "4.2.*",
-		"dingo/api": "0.8.2"
+		"dingo/api": "0.8.2",
+		"guzzlehttp/guzzle": "~4.0"
 	},
 	"autoload": {
 		"classmap": [

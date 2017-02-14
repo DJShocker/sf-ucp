@@ -164,8 +164,14 @@ class GangController extends BaseController {
         }
 
         // check if kicking user is a leader
-        if (! $gang->is_leader($user)) {
-            return Response::json(array('error' => "You are not a leader of this gang"));
+        if ($gang->LEADER == $user->ID) {
+            return Response::json(array('error' => "You cannot kick leaders of this gang"));
+        }
+
+        // check if co-leader
+        if ($gang->COLEADER == $user->ID) {
+            $gang->COLEADER = 0;
+            $gang->save();
         }
 
         // reset his gang

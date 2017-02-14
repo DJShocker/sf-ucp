@@ -77,6 +77,12 @@ Route::post('/admin/manage/password', 	['as' => 'password', 	'uses' => 'Admin\Pl
 Route::post('/admin/manage/jail', 		['as' => 'jail', 		'uses' => 'Admin\PlayerController@jail']);
 Route::post('/admin/manage/mute', 		['as' => 'mute', 		'uses' => 'Admin\PlayerController@mute']);
 
+// Email tools
+Route::group(array('prefix' => '/email'), function() {
+	Route::any('/process',					array('uses' => 'EmailController@process'));
+	Route::get('/verify/{acc}/{id}',		array('uses' => 'EmailController@verify'));
+});
+
 // API
 Route::api(['version' => 'v1', 'prefix' => 'api'], function()
 {
