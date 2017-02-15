@@ -10,10 +10,6 @@ class Gang extends Eloquent{
         return $this->belongsTo('User', 'LEADER', 'ID');
     }
 
-    public function coleader() {
-        return $this->belongsTo('User', 'COLEADER', 'ID');
-    }
-
     public function members() {
         return $this->hasMany('User', 'GANG_ID', 'ID');
     }
@@ -28,6 +24,10 @@ class Gang extends Eloquent{
     }
 
     public function is_leader(User $user) {
-        return ( $this->LEADER == $user->ID || $this->COLEADER == $user->ID );
+        if ($this->LEADER == $user->ID)
+            return true;
+
+        $coleader = GangColeader::where('GANG_ID', '=', $this->ID)->where('USER_ID', '=', $user->ID)->first();
+        return ! is_null($coleader);
     }
 }

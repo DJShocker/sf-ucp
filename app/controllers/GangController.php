@@ -99,17 +99,32 @@ class GangController extends BaseController {
             return \Redirect::to('/dashboard')->withErrors(["Gang could not be found."]);
         }
 
+        // check if current user is a leader
         $isClanLeader = $gang->is_leader($currentUser);
 
-        $leaders = User::where('ID', $gang->LEADER)->get();
-        $coleaders = User::whereIn('ID', [$gang->COLEADER])->get();
-        $leaders = $leaders->merge($coleaders);
+        // get the gang leader
+        $leader = User::where('ID', $gang->LEADER)->first();
 
-        $members = User::where('GANG_ID', '=', $gang->ID)->whereNotIn('ID', [$gang->LEADER, $gang->COLEADER])->get();
+        // get the coleaders
+        $coleaderUserIds = GangColeader::where('GANG_ID', '=', $gang->ID)->lists('USER_ID');
+        $coleaders = User::whereIn('ID', $coleaderUserIds)->get();
+
+        // merge leaders and coleaders into an collection
+        $coleaders = $coleaders->add($leader);
+
+        // reverse the coleaders collection otherwise it will show all coleaders first
+        $coleaders = $coleaders->reverse();
+
+        // including leader in the coleaders user id array just for the purpose of filtering them out of the member list
+        $coleaderUserIds[] = $leader->ID;
+
+        // get all members except the coleaders
+        $members = User::where('GANG_ID', '=', $gang->ID)->whereNotIn('ID', $coleaderUserIds)->limit(20)->get();
 
         // merge leaders and members
-       	$members = $leaders->merge($members);
+       	$members = $coleaders->merge($members);
 
+        // average activity
         $averageActivity = ceil(User::where('GANG_ID', '=', $gang->ID)->avg(DB::raw('UPTIME - WEEKEND_UPTIME')));
 
         return Response::make(
@@ -165,13 +180,15 @@ class GangController extends BaseController {
 
         // check if kicking user is a leader
         if ($gang->LEADER == $user->ID) {
-            return Response::json(array('error' => "You cannot kick leaders of this gang"));
+            return Response::json(array('error' => "You cannot kick the leader of the gang"));
         }
 
         // check if co-leader
-        if ($gang->COLEADER == $user->ID) {
-            $gang->COLEADER = 0;
-            $gang->save();
+        $coleader = GangColeader::where('GANG_ID', '=', $gang->ID)->where('USER_ID', '=', $user->ID)->first();
+
+        // destroy coleader record if valid
+        if ( ! is_null($coleader)) {
+            GangColeader::where('GANG_ID', '=', $gang->ID)->where('USER_ID', '=', $user->ID)->delete();
         }
 
         // reset his gang
