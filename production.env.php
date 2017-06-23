@@ -1,8 +1,0 @@
-<?php
- 
-return [
-	'DATABASE_HOST' => '192.169.82.202',
-	'DATABASE_NAME' => 'sa-mp',
-	'DATABASE_USERNAME' => 'service',
-	'DATABASE_PASSWORD' => '82JA8LDL1JAG2GF69',
-];

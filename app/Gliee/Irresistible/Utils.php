@@ -1,7 +1,7 @@
 <?php namespace Gliee\Irresistible;
 
 class Utils
-{	
+{
 	public function __construct()
 	{
 		// construct
@@ -20,7 +20,7 @@ class Utils
 
 	public static function adminlevelToString($rank)
 	{
-		switch($rank) 
+		switch($rank)
 		{
 			case 6:	$string = '<font color="#800000"><strong>Executive Administrator</strong></font>';	break;
 			case 5:	$string = '<font color="#FF0000"><strong>Head Administrator</strong></font>';		break;
@@ -29,7 +29,7 @@ class Utils
 			case 2:	$string = '<font color="#9900FF"><strong>General Administrator</strong></font>';	break;
 			case 1:	$string = '<font color="#C26100"><strong>Trial Administrator</strong></font>';		break;
 			default: $string = 'None';
-		}		
+		}
 		return $string;
 	}
 
@@ -42,12 +42,13 @@ class Utils
             case 3:  $string = "Silver"; 	break;
             case 4:  $string = "Gold"; 		break;
             case 5:  $string = "Platinum"; 	break;
+            case 6:  $string = "Diamond";	break;
             default: $string = "n/a"; 		break;
 		}
 		return $string;
 	}
 
-	public static function skillToString($skill) 
+	public static function skillToString($skill)
 	{
 		switch($skill)
 		{

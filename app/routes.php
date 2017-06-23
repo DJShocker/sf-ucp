@@ -99,5 +99,7 @@ Route::api(['version' => 'v1', 'prefix' => 'api'], function()
 	Route::get('/player/help/{id}', 	'API\PlayerController@article');
 	Route::get('/player/feedback/{id}',	'API\PlayerController@feedbackDestroy');
 	Route::get('/players',				'API\PlayerController@totalPlayers');
+	Route::get('/player/validate/{id}',	'API\PlayerController@validate');
+	Route::get('/player/top_donors',	'API\PlayerController@topDonors');
 	Route::get('/player/{id}/{name}',	'API\PlayerController@data');
 });

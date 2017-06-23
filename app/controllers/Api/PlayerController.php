@@ -61,7 +61,7 @@ class PlayerController extends \Controller {
             'kills' => (int)$userData->KILLS,
             'deaths' => (int)$userData->DEATHS,
             'ratio' => (float)sprintf("%4.2f",$userData->KILLS/$userData->DEATHS),
-            'admin' => (int)$userData->ADMIN_LEVEL,
+            'admin' => (int)$userData->ADMINLEVEL,
             'vip' => (string)\Gliee\Irresistible\Utils::vipToString($userData->VIP_PACKAGE),
             'score' => (int)$userData->SCORE,
             'last_logged' => (string)\Carbon\Carbon::createFromTimeStamp($userData->LASTLOGGED)->diffForHumans(),
@@ -99,5 +99,36 @@ class PlayerController extends \Controller {
     {
         $totalPlayers = \User::where('ONLINE', '>=', 1)->count('ONLINE');
         return ['players' => $totalPlayers];
+    }
+
+    public function validate($name)
+    {
+        $user = \User::where('NAME', '=', $name)->select('NAME')->first();
+
+        if ( ! is_null($user)) {
+            return ['name' => $user->NAME];
+        } else {
+            return $this->response->error("User could not be found", 404);
+        }
+    }
+
+    public function topDonors()
+    {
+        $topDonor = \DB::table('TOP_DONOR')->orderBy('AMOUNT', 'desc')->remember(30)->first();
+        $topDonorUsername = "<i>Anonymous</i>";
+
+        if ( ! is_null($topDonor) && ! $topDonor->HIDE )
+        {
+            $topDonorUser = \User::remember(30)->find($topDonor->USER_ID);
+            $topDonorUsername = $topDonorUser->NAME;
+        }
+
+        $donors = \DB::table('REDEEMED')->orderBy('TIME', 'desc')->distinct()->remember(30)->lists('REDEEMER');
+
+        return [
+            'top_donor' => $topDonorUsername,
+            'donors' => $donors
+        ];
+
     }
 }
