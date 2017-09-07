@@ -77,6 +77,15 @@ Route::post('/admin/manage/password', 	['as' => 'password', 	'uses' => 'Admin\Pl
 Route::post('/admin/manage/jail', 		['as' => 'jail', 		'uses' => 'Admin\PlayerController@jail']);
 Route::post('/admin/manage/mute', 		['as' => 'mute', 		'uses' => 'Admin\PlayerController@mute']);
 
+// Crowdfunding
+Route::group(array('prefix' => '/crowdfund'), function() {
+
+	Route::any('/', 					['as' => 'crowdfund.index', 'uses' => 'CrowdfundController@index']);
+	Route::any('{id}/pledge', 			['as' => 'crowdfund.pledge', 'uses' => 'CrowdfundController@pledge']);
+	Route::any('{id}', 					['as' => 'crowdfund.show', 'uses' => 'CrowdfundController@show']);
+});
+
+
 // Email tools
 Route::group(array('prefix' => '/email'), function() {
 	Route::any('/process',					array('uses' => 'EmailController@process'));
