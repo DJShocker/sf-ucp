@@ -1,12 +1,10 @@
 @extends('layout/application')
 
 @section('page-heading')
-	@if (!is_null($crowdfund))
-		@if ($crowdfund->amountRaised() > $crowdfund->FUND_TARGET)
-			<h3 class="pull-right text-success" style="padding-right: 48px">Successfully funded! Estimated release {{ $crowdfund->releaseIn() }}!</h3>
-		@elseif ($crowdfund->isEnded())
-			<h3 class="pull-right text-danger" style="padding-right: 48px">Crowdfund unsuccessful. Users will be pending a refund.</h3>
-		@endif
+	@if ($crowdfund->amountRaised() >= $crowdfund->FUND_TARGET)
+		<h3 class="pull-right text-success" style="padding-right: 48px">Successfully funded! Estimated release {{ $crowdfund->releaseIn() }}!</h3>
+	@elseif ($crowdfund->isEnded())
+		<h3 class="pull-right text-danger" style="padding-right: 48px">Crowdfund unsuccessful. Users will be pending a refund.</h3>
 	@endif
 @stop
 
@@ -29,11 +27,11 @@
 				@foreach ($crowdfundData as $fund)
 			    <div class="contextual-progress">
 			        <div class="clearfix">
-			            <div class="progress-title"><a href="{{ route('crowdfund.show', $fund->ID) }}" style="color: rgb(77, 77, 77)">{{ $fund->FEATURE }}</a></div>
+			            <div class="progress-title"><a href="{{ route('crowdfund.show', $fund->ID) }}" style="color: {{ $fund->ID != $crowdfund->ID ? 'rgb(77, 77, 77)' : 'rgb(43, 188, 224)' }}">{{ $fund->FEATURE }}</a></div>
 			            <div class="progress-percentage">{{ number_format($fund->pledgePercentage(), 1) }}%</div>
 			        </div>
 			        <div class="progress">
-			            <div class="progress-bar {{ $fund->amountRaised() > $crowdfund->FUND_TARGET ? 'progress-bar-success' : ($fund->isEnded() ? 'progress-bar-danger' : 'progress-bar-info') }}" style="width: {{ $fund->pledgePercentage() }}%"></div>
+			            <div class="progress-bar {{ $fund->amountRaised() >= $crowdfund->FUND_TARGET ? 'progress-bar-success' : ($fund->isEnded() ? 'progress-bar-danger' : 'progress-bar-info') }}" style="width: {{ $fund->pledgePercentage() }}%"></div>
 			        </div>
 			    </div>
 			    @endforeach
@@ -68,7 +66,7 @@
 						<!-- pledge information -->
 						<div class="col-md-8">
 						    <div class="progress">
-						      <div class="progress-bar {{ $crowdfund->amountRaised() > $crowdfund->FUND_TARGET ? 'progress-bar-success' : ($crowdfund->isEnded() ? 'progress-bar-danger' : 'progress-bar-info') }}" style="width: {{ $crowdfund->pledgePercentage() }}%"></div>
+						      <div class="progress-bar {{ $crowdfund->amountRaised() >= $crowdfund->FUND_TARGET ? 'progress-bar-success' : ($crowdfund->isEnded() ? 'progress-bar-danger' : 'progress-bar-info') }}" style="width: {{ $crowdfund->pledgePercentage() }}%"></div>
 						    </div>
 
 						    <div style="margin-bottom: 2em">
@@ -115,7 +113,7 @@
 								<p>{{ $package->DESCRIPTION }}</p>
 								<p>
 									@foreach ($patreons as $patreon)
-										@if ($patreon->AMOUNT > $package->REQUIRED_AMOUNT)
+										@if ($patreon->TOTAL >= $package->REQUIRED_AMOUNT)
 											<span class="label {{ $currentUser->ID == $patreon->USER_ID ? 'label-primary' : 'label-default' }}">{{ $patreon->user->NAME }}</span>
 										@endif
 									@endforeach

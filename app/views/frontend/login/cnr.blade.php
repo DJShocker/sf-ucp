@@ -14,22 +14,21 @@
       <div class="panel panel-primary">
         <div class="panel-body">
           <h4 class="text-center">
-            SF-UCP<br>
-            <a href="//revctrl.com/IrresistibleDev/SF-UCP/latest" style="text-decoration: none" target="_blank"><small class="text-center">See what's new!</small></a>
+            SF-UCP
           </h4>
           <!-- Begin login form -->
           {{Form::open(['url' => '/auth/new', 'class' => 'form-horizontal', 'method' => 'post'])}}
 
             <div class="form-group {{count($errors->all()) ? 'has-error' : ''}}">
               {{Form::label('username', 'Username', ['class'=>'control-label col-sm-3', 'style'=>'text-align: left;'])}}
-              <div class="col-sm-9">              
+              <div class="col-sm-9">
                 {{Form::text('username', '', ['class' => 'form-control'])}}
               </div>
             </div>
 
             <div class="form-group {{count($errors->all()) ? 'has-error' : ''}}">
               {{Form::label('password', 'Password', ['class'=>'control-label col-sm-3', 'style'=>'text-align: left;'])}}
-              <div class="col-sm-9">              
+              <div class="col-sm-9">
                 {{Form::password('password', ['class' => 'form-control'])}}
 
                 @if(isset($errors))
@@ -51,7 +50,7 @@
           </div>
 
         </div>
-        <div class="panel-footer"> 
+        <div class="panel-footer">
           <div class="text-center">&copy; IrresistibleGaming, 2011.</div>
         </div>
       </div>

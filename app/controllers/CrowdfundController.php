@@ -2,6 +2,11 @@
 
 class CrowdfundController extends \BaseController {
 
+    public function __construct()
+    {
+        $this->beforeFilter('auth');
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -136,7 +141,7 @@ class CrowdfundController extends \BaseController {
 
 			// redirect
 			$formatAmount = number_format($contribution, 2);
-			return Redirect::route('crowdfund.show', $id)->with('success', "Thanks for contributing {$formatAmount} IC to {$crowdfund->FEATURE}.");
+			return Redirect::route('crowdfund.show', $id)->with('success', "Thanks for contributing {$formatAmount} IC to the {$crowdfund->FEATURE}.");
 		}
 		catch (Exception $e)
 		{

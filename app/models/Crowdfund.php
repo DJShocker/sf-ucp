@@ -19,7 +19,7 @@ class Crowdfund extends Eloquent{
 
     public function releaseIn()
     {
-    	if ($this->RELEASE_DATE) {
+    	if ( ! $this->RELEASE_DATE) {
     		return "to be announced";
     	} else {
 	    	$releaseDate = new Carbon($this->RELEASE_DATE);
@@ -36,7 +36,7 @@ class Crowdfund extends Eloquent{
 
     public function packages()
     {
-    	return $this->hasMany('CrowdfundPack', 'CROWDFUND_ID');
+    	return $this->hasMany('CrowdfundPack', 'CROWDFUND_ID')->orderBy('REQUIRED_AMOUNT', 'desc');
     }
 
     public function patreons()
