@@ -82,6 +82,7 @@ Route::group(array('prefix' => '/crowdfund'), function() {
 
 	Route::any('/', 					['as' => 'crowdfund.index', 'uses' => 'CrowdfundController@index']);
 	Route::any('{id}/pledge', 			['as' => 'crowdfund.pledge', 'uses' => 'CrowdfundController@pledge']);
+	Route::any('{id}/refund', 			['as' => 'crowdfund.refund', 'uses' => 'CrowdfundController@refund']);
 	Route::any('{id}', 					['as' => 'crowdfund.show', 'uses' => 'CrowdfundController@show']);
 });
 

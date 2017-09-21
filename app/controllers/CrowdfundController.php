@@ -71,11 +71,11 @@ class CrowdfundController extends \BaseController {
 
        	$crowdfund = Crowdfund::findOrFail($id);
 
-       	$crowdfundData = Crowdfund::all();
+       	$crowdfundData = Crowdfund::orderBy('RELEASE_DATE', 'asc')->get();
 
        	$userPledge = CrowdfundPatreon::where('CROWDFUND_ID', $crowdfund->ID)->where('USER_ID', $currentUser->ID)->sum('AMOUNT');
 
-       	$patreons = CrowdfundPatreon::where('CROWDFUND_ID', $crowdfund->ID)->select('*', DB::raw('SUM(AMOUNT) as TOTAL'))->groupBy('USER_ID')->orderBy('TOTAL', 'desc')->get();
+       	$patreons = CrowdfundPatreon::where('CROWDFUND_ID', $crowdfund->ID)->select('*', DB::raw('SUM(AMOUNT) as TOTAL'))->groupBy('USER_ID')->orderBy('TOTAL', 'desc')->with('user')->get();
 
         return Response::make(
             View::make('crowdfund.show')
@@ -90,6 +90,46 @@ class CrowdfundController extends \BaseController {
         );
 	}
 
+
+    /**
+     * Refund players
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function refund($id)
+    {
+        $currentUser = User::find(Session::get('UUID'));
+
+        if ( ! $currentUser) {
+            return App::abort('404');
+        }
+
+        $crowdfund = Crowdfund::findOrFail($id);
+
+        if ($currentUser->ID != Config::get('irresistible.owner')) {
+            return Redirect::route('crowdfund.show', $id)->withErrors(["Insufficient permissions."]);
+        }
+
+        // dont refund shit with a release date
+        if ($crowdfund->RELEASE_DATE) {
+            return Redirect::route('crowdfund.show', $id)->withErrors(["You cannot refund a crowdfund that is assigned a release date."]);
+        }
+
+        // search patreons
+        $patreons = CrowdfundPatreon::where('CROWDFUND_ID', $crowdfund->ID)->select('*', DB::raw('SUM(AMOUNT) as TOTAL'))->groupBy('USER_ID')->orderBy('TOTAL', 'desc')->with('user')->get();
+
+        // update the users
+        foreach ($patreons as $key) {
+            $userUpdated = \User::where('ID', '=', $key->user->ID)->update(['COINS' => $key->user->COINS + $key->TOTAL]);
+        }
+
+        // delete all patreons
+        $patreons = CrowdfundPatreon::where('CROWDFUND_ID', $crowdfund->ID)->delete();
+
+        // redirect
+        return Redirect::route('crowdfund.show', $id)->with('success', "All contributions have been refunded.");
+    }
 
 	/**
 	 * Pledge a donation

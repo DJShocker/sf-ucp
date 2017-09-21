@@ -19,12 +19,22 @@ class Crowdfund extends Eloquent{
 
     public function releaseIn()
     {
-    	if ( ! $this->RELEASE_DATE) {
+        $releaseDate = new Carbon($this->RELEASE_DATE);
+        if ($releaseDate == Carbon::parse('0000-00-00 00:00:00') {
     		return "to be announced";
     	} else {
-	    	$releaseDate = new Carbon($this->RELEASE_DATE);
 	    	return $releaseDate->diffForHumans();
     	}
+    }
+
+    public function isReleased()
+    {
+        $endDate = new Carbon($this->RELEASE_DATE);
+        if ($endDate == Carbon::parse('0000-00-00 00:00:00') {
+            return false;
+        } else {
+            return $endDate->isPast();
+        }
     }
 
     public function isEnded()

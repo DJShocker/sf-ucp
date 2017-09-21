@@ -7,7 +7,7 @@
 		<li @if(Request::is('highscores')) class="active" @endif><a href="{{URL::route('highscores')}}"><i class="fa fa-trophy"></i> <span>Highscores</span></a></li>
 		<li @if(Request::is('seasonal')) class="active" @endif><a href="{{URL::route('seasonal')}}"><i class="fa fa-leaf"></i> <span>Seasonal</span></a></li>
 
-		<li class="closed hasChild {{Request::is('gangs/*') ? 'open active' : ''}} "><a href="javascript:;"><i class="fa fa-group"></i> <span>Gangs <span class="label label-info" style="margin-left: 9em">BETA</span></a>
+		<li class="closed hasChild {{Request::is('gangs/*') ? 'open active' : ''}} "><a href="javascript:;"><i class="fa fa-group"></i> <span>Gangs</a>
             <ul class="acc-menu" style="display: none;">
                 <li @if(Request::is('gangs/highscores')) class="active" @endif><a href="{{URL::route('gangs.highscores')}}">Highscores</a></li>
                 @if ($currentUser->gang)

@@ -16,7 +16,6 @@
                             <th><a href="/gangs/highscores?page={{$gangs->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=bank">Bank</a></th>
                             <th><a href="/gangs/highscores?page={{$gangs->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=kills">Kills</a></th>
                             <th><a href="/gangs/highscores?page={{$gangs->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=deaths">Deaths</a></th>
-                            <th><a href="/gangs/highscores?page={{$gangs->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=member">Members</a></th>
                             <th><a href="/gangs/highscores?page={{$gangs->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=private">Private</a></th>
                         </tr>
                     </thead>
@@ -41,7 +40,6 @@
                                     <td>${{ number_format($gang->BANK) }}</td>
                                     <td>{{ number_format($gang->KILLS) }}</td>
                                     <td>{{ number_format($gang->DEATHS) }}</td>
-                                    <td>{{ $gang->MEMBERS }}
                                     <td>{{ $gang->INVITE_ONLY ? "Yes" : "No" }}</td>
                                 </tr>
                             @endforeach

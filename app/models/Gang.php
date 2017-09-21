@@ -27,6 +27,9 @@ class Gang extends Eloquent{
         if ($this->LEADER == $user->ID)
             return true;
 
+        if ($user->GANG_ID != $this->ID)
+            return false;
+
         $coleader = GangColeader::where('GANG_ID', '=', $this->ID)->where('USER_ID', '=', $user->ID)->first();
         return ! is_null($coleader);
     }

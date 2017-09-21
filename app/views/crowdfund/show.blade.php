@@ -27,11 +27,11 @@
 				@foreach ($crowdfundData as $fund)
 			    <div class="contextual-progress">
 			        <div class="clearfix">
-			            <div class="progress-title"><a href="{{ route('crowdfund.show', $fund->ID) }}" style="color: {{ $fund->ID != $crowdfund->ID ? 'rgb(77, 77, 77)' : 'rgb(43, 188, 224)' }}">{{ $fund->FEATURE }}</a></div>
+			            <div class="progress-title"><a href="{{ route('crowdfund.show', $fund->ID) }}" style="color: {{$fund->ID != $crowdfund->ID ? 'rgb(77, 77, 77)' : ($fund->amountRaised() >= $fund->FUND_TARGET ? 'rgb(133, 199, 68)' : ($fund->isEnded() ? 'rgb(168, 21, 21)' : 'rgb(43, 188, 224)'))}}">{{ $fund->FEATURE }}</a></div>
 			            <div class="progress-percentage">{{ number_format($fund->pledgePercentage(), 1) }}%</div>
 			        </div>
 			        <div class="progress">
-			            <div class="progress-bar {{ $fund->amountRaised() >= $crowdfund->FUND_TARGET ? 'progress-bar-success' : ($fund->isEnded() ? 'progress-bar-danger' : 'progress-bar-info') }}" style="width: {{ $fund->pledgePercentage() }}%"></div>
+			            <div class="progress-bar {{ $fund->amountRaised() >= $fund->FUND_TARGET ? 'progress-bar-success' : ($fund->isEnded() ? 'progress-bar-danger' : 'progress-bar-info') }}" style="width: {{ $fund->pledgePercentage() }}%"></div>
 			        </div>
 			    </div>
 			    @endforeach
@@ -146,6 +146,7 @@
 					                            <tr>
 					                                <td><strong>User</strong></td>
 					                                <td><strong>Total Contribution</strong></td>
+					                                <td><strong>In-game Status</strong></td>
 					                            </tr>
 					                        </thead>
 					                        <tbody>
@@ -157,6 +158,11 @@
 					                                    <td style="color: red"><strong>User Does Not Exist</strong></td>
 					                                @endif
 					                                <td>{{ number_format($key->TOTAL, 2) }} IC</td>
+					                                @if ($key->user && $key->user->ONLINE)
+					                                    <td style="color: green"><strong>online</strong></td>
+					                                @else
+					                                    <td style="color: red"><strong>offline</strong></td>
+					                               	@endif
 					                            </tr>
 					                        @endforeach
 					                        </tbody>
@@ -165,6 +171,10 @@
 					                </div>
 					            </div>
 				            </div>
+
+				            @if ($currentUser->ID == Config::get('irresistible.owner') && ! $crowdfund->isReleased())
+				            	<a href="{{ route('crowdfund.refund', $crowdfund->ID ) }}" class="btn btn-block btn-lg btn-danger">Refund All Patreons</a>
+				            @endif
 				        </div>
 				    </div>
 

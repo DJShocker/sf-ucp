@@ -54,9 +54,6 @@ class GangController extends BaseController {
             case "private":
                 $field .= "INVITE_ONLY";
                 break;
-            case "member":
-            	$field .= "MEMBERS";
-            	break;
             default:
                 $inputField = "tag";
                 $field .= "CLAN_TAG";
@@ -67,11 +64,7 @@ class GangController extends BaseController {
         $currentSort = ($sort == "desc") ? "asc" : "desc";
 
         // select relevant gangs
-       	$gangs = Gang::leftJoin('USERS', 'USERS.GANG_ID', '=', 'GANGS.id')
-       				 ->selectRaw('GANGS.*, count(USERS.id) as MEMBERS')
-       				 ->groupBy('GANGS.ID')
-       				 ->orderBy( $field, $sort )
-       				 ->paginate(15);
+       	$gangs = Gang::orderBy( $field, $sort )->paginate(15);
 
         return Response::make(
             View::make('gangs.highscores')
