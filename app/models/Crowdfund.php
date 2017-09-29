@@ -20,7 +20,7 @@ class Crowdfund extends Eloquent{
     public function releaseIn()
     {
         $releaseDate = new Carbon($this->RELEASE_DATE);
-        if ($releaseDate == Carbon::parse('0000-00-00 00:00:00') {
+        if ($releaseDate == Carbon::parse('0000-00-00 00:00:00')) {
     		return "to be announced";
     	} else {
 	    	return $releaseDate->diffForHumans();
@@ -30,7 +30,7 @@ class Crowdfund extends Eloquent{
     public function isReleased()
     {
         $endDate = new Carbon($this->RELEASE_DATE);
-        if ($endDate == Carbon::parse('0000-00-00 00:00:00') {
+        if ($endDate == Carbon::parse('0000-00-00 00:00:00')) {
             return false;
         } else {
             return $endDate->isPast();

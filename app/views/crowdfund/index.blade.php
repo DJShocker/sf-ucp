@@ -16,7 +16,7 @@
 						    <div class="contextual-progress">
 						        <div class="clearfix">
 						            <div class="progress-title"><a href="{{ route('crowdfund.show', $fund->ID) }}" style="color: rgb(77, 77, 77)">{{ $fund->FEATURE }}</a></div>
-						            <div class="progress-percentage">{{ number_format($fund->pledgePercentage(), 1) }}% funded &bullet; {{ $fund->patreons->count() }} {{ $fund->patreons->count() > 1 ? 'backers' : 'backer' }}</div>
+						            <div class="progress-percentage">{{ number_format($fund->pledgePercentage(), 1) }}% funded &bullet; {{ $fund->patreons->groupBy('USER_ID')->count() }} {{ $fund->patreons->count() > 1 ? 'backers' : 'backer' }}</div>
 						        </div>
 						        <div class="progress">
 						            <div class="progress-bar {{ $fund->amountRaised() > $fund->FUND_TARGET ? 'progress-bar-success' : ($fund->isEnded() ? 'progress-bar-danger' : 'progress-bar-info') }}" style="width: {{ $fund->pledgePercentage() }}%"></div>

@@ -39,10 +39,9 @@ class Utils
 		{
             case 1:  $string = "Regular"; 	break;
             case 2:  $string = "Bronze"; 	break;
-            case 3:  $string = "Silver"; 	break;
-            case 4:  $string = "Gold"; 		break;
-            case 5:  $string = "Platinum"; 	break;
-            case 6:  $string = "Diamond";	break;
+            case 3:  $string = "Gold"; 		break;
+            case 4:  $string = "Platinum"; 	break;
+            case 5:  $string = "Diamond";	break;
             default: $string = "n/a"; 		break;
 		}
 		return $string;

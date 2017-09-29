@@ -173,7 +173,7 @@
 				            </div>
 
 				            @if ($currentUser->ID == Config::get('irresistible.owner') && ! $crowdfund->isReleased())
-				            	<a href="{{ route('crowdfund.refund', $crowdfund->ID ) }}" class="btn btn-block btn-lg btn-danger">Refund All Patreons</a>
+				            	<a href="#" data-url="{{ route('crowdfund.refund', $crowdfund->ID ) }}" class="btn btn-block btn-lg btn-danger" id="refundPeople">Refund All Patreons</a>
 				            @endif
 				        </div>
 				    </div>
@@ -189,4 +189,15 @@
 
 	@endif
 	</div>
+@endsection
+
+@section ('jscontent')
+<script type="text/javascript">
+	$('#refundPeople').click(function (e) {
+		e.preventDefault();
+		if (window.confirm("Are you sure that you want to refund everyone?")) {
+			window.location.href = $(this).data('url');
+		}
+	});
+</script>
 @endsection

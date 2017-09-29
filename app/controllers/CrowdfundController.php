@@ -20,7 +20,7 @@ class CrowdfundController extends \BaseController {
             return App::abort('404');
         }
 
-       	$crowdfundData = Crowdfund::with('patreons')->get();
+       	$crowdfundData = Crowdfund::orderBy('ORDER', 'desc')->with('patreons')->get();
 
         return Response::make(
             View::make('crowdfund.index')
@@ -71,7 +71,7 @@ class CrowdfundController extends \BaseController {
 
        	$crowdfund = Crowdfund::findOrFail($id);
 
-       	$crowdfundData = Crowdfund::orderBy('RELEASE_DATE', 'asc')->get();
+       	$crowdfundData = Crowdfund::orderBy('ORDER', 'desc')->get();
 
        	$userPledge = CrowdfundPatreon::where('CROWDFUND_ID', $crowdfund->ID)->where('USER_ID', $currentUser->ID)->sum('AMOUNT');
 
@@ -112,7 +112,7 @@ class CrowdfundController extends \BaseController {
         }
 
         // dont refund shit with a release date
-        if ($crowdfund->RELEASE_DATE) {
+        if ($crowdfund->isReleased()) {
             return Redirect::route('crowdfund.show', $id)->withErrors(["You cannot refund a crowdfund that is assigned a release date."]);
         }
 
