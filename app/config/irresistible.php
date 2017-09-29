@@ -46,8 +46,6 @@ return array(
 	|
 	*/
 	'gaming'	=> 	'svr.irresistiblegaming.com',
-
-	'irc' 		=>	'foco.ca.irc.tl',
-	'ircchan' 	=> 	'#sf-cnr'
+	'discord' 	=>	'https://discord.gg/vfXcwc',
 
 );

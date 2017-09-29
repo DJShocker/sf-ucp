@@ -20,7 +20,7 @@ class CrowdfundController extends \BaseController {
             return App::abort('404');
         }
 
-       	$crowdfundData = Crowdfund::orderBy('ORDER', 'desc')->with('patreons')->get();
+       	$crowdfundData = Crowdfund::orderBy('ORDER', 'asc')->with('patreons')->get();
 
         return Response::make(
             View::make('crowdfund.index')
@@ -71,7 +71,7 @@ class CrowdfundController extends \BaseController {
 
        	$crowdfund = Crowdfund::findOrFail($id);
 
-       	$crowdfundData = Crowdfund::orderBy('ORDER', 'desc')->get();
+       	$crowdfundData = Crowdfund::orderBy('ORDER', 'asc')->get();
 
        	$userPledge = CrowdfundPatreon::where('CROWDFUND_ID', $crowdfund->ID)->where('USER_ID', $currentUser->ID)->sum('AMOUNT');
 

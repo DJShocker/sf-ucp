@@ -93,6 +93,11 @@ Route::group(array('prefix' => '/email'), function() {
 	Route::get('/verify/{acc}/{id}',		array('uses' => 'EmailController@verify'));
 });
 
+// Discord redirect
+Route::get('discord', function () {
+	return Redirect::to(Config::get('irresistible.discord'));
+});
+
 // API
 Route::api(['version' => 'v1', 'prefix' => 'api'], function()
 {
