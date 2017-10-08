@@ -2,7 +2,7 @@
 
 class RankS1 extends Eloquent{
 
-    protected $table = 'RANKS_S3';
+    protected $table = 'RANKS_S4';
 
     protected $timestamp = false;
 

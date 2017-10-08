@@ -9,8 +9,7 @@ class HelpController extends BaseController {
     ];
 
     static $deleteRules = [
-        "id"        => "required|exists:HELP,ID",
-        "user_id"   => "required|exists:USERS,ID",
+        "id"        => "required|exists:HELP,ID"
     ];
 
     public function __construct()
@@ -57,6 +56,75 @@ class HelpController extends BaseController {
                 ->with('pageheadTitle',     'Help Centre')
             , 200
         );
+    }
+
+    public function edit($id)
+    {
+        $currentUser = User::find(Session::get('UUID'));
+
+        if(!$currentUser) {
+            return App::abort('404');
+        }
+
+        $topic = Help::where('ID', '=', $id)->first();
+
+        if (!$topic) {
+            return App::abort('404');
+        }
+
+        return Response::make(
+            View::make('help.edit')
+                ->with('topic',             $topic)
+                ->with('currentUser',       $currentUser)
+                ->with('breadCrumb',        ['Dashboard', '<a href="/help">Help Centre</a>', 'Edit Thread'])
+                ->with('pageheadTitle',     'Help Centre')
+            , 200
+        );
+    }
+
+    public function save($id)
+    {
+        $user = User::find(Session::get('UUID'));
+
+        if(!$user) {
+            return App::abort('404');
+        }
+
+        $topic = Help::where('ID', '=', $id)->first();
+
+        if (!$topic) {
+            return App::abort('404');
+        }
+
+        $validation = Validator::make( Input::all( ), static::$submitRules );
+
+        if($validation->fails()) {
+            return Redirect::route('help.edit', $topic->ID)->withErrors($validation)->withInput();
+        }
+
+        try
+        {
+            $content = trim(Input::get('content'));
+
+            if (strlen(strip_tags(html_entity_decode($content))) > 2048)
+                return Redirect::route('help.edit', $topic->ID)->withErrors(["Please ensure that the character limit is less than 2048."])
+                                                    ->withInput();
+
+            if ($user->ID != $getHelp->USER_ID && $user->ADMINLEVEL < 5)
+                return Redirect::to( "/dashboard" )->withErrors(["You do not have permission to use this feature."]);
+
+            $category  = trim(strip_tags(Input::get('category')));
+            $subject   = trim(strip_tags(Input::get('subject')));
+            Help::where('ID', '=', $id)->update(['CATEGORY' => $category, 'SUBJECT' => $subject, 'CONTENT' => $content]);
+
+            Session::flash('success', "You've edited a thread.");
+            return Redirect::to( "/help" );
+
+        }
+        catch(\Exception $e)
+        {
+            return Redirect::to('/help')->withErrors(["Unable to remove help thread due to an internal error."]);
+        }
     }
 
     public function destroy()
@@ -106,14 +174,14 @@ class HelpController extends BaseController {
             return Redirect::to('/help/write')->withErrors($validation)
                                               ->withInput();
 
-        try 
+        try
         {
             $content = trim(Input::get('content'));
-            
+
             if( strlen(strip_tags(html_entity_decode($content))) > 2048 )
                 return Redirect::to( "/help/write" )->withErrors(["Please ensure that the character limit is less than 2048."])
-                                                    ->withInput();  
-        
+                                                    ->withInput();
+
             if( $user->ADMINLEVEL < 3 )
                 return Redirect::to( "/dashboard" )->withErrors(["You do not have permission to use this feature."]);
 

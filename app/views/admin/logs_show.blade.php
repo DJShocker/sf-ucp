@@ -66,7 +66,7 @@
 			    </table>
 		    </div>
 
-		    <div class="text-center">{{ $adminLogs->links() }}</div>
+            <div align="center">{{ $adminLogs->appends(Input::except('_token'))->links() }}</div>
 		</div>
 	</div>
 </div>

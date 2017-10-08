@@ -69,10 +69,11 @@ class Utils
 		switch($category)
 		{
 			case 0: $string = '<span class="label label-server">Server</span>'; break;
-			case 1: $string = '<span class="label label-help">Help</span>'; 	break;
-			case 2: $string = '<span class="label label-faq">FAQ</span>';		break;
-			case 3: $string = '<span class="label label-guide">GUIDE</span>';	break;
-			case 4: $string = '<span class="label label-tips">TIPS</span>';		break;
+			case 1: $string = '<span class="label label-help">Features</span>'; break;
+			case 2: $string = '<span class="label label-faq">Help</span>'; 	break;
+			case 3: $string = '<span class="label label-guide">FAQ</span>';		break;
+			case 4: $string = '<span class="label label-tips">GUIDE</span>';	break;
+			case 5: $string = '<span class="label" style="background: #AD66D5">TIPS</span>'; break;
 			default: $string = "info";
 		}
 		return $string;

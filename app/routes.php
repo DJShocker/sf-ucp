@@ -31,6 +31,8 @@ Route::any('/help', 					['as' => 'help', 		'uses' => 'HelpController@index']);
 Route::any('/help/write', 				['as' => 'helpwrite', 	'uses' => 'HelpController@write']);
 Route::post('/help/destroy', 			['as' => 'destroytopic','uses' => 'HelpController@destroy']);
 Route::post('/help/create', 			['as' => 'createtopic', 'uses' => 'HelpController@create']);
+Route::get('/help/{id}/edit',			['as' => 'help.edit', 	'uses' => 'HelpController@edit']);
+Route::post('/help/{id}',				['as' => 'help.save', 	'uses' => 'HelpController@save']);
 
 // Pages (not worthy of controller)
 Route::any('/achievements', 			['as' => 'achievements','uses' => 'PageController@achievements']);
@@ -55,11 +57,11 @@ Route::any('/admin/transactions/gang/search',		['as' => 'admin.trans.gang.search
 Route::any('/admin/transactions', 		['as' => 'admin.transactions', 'uses' => 'Admin\AdminController@transaction']);
 
 // Admin - Player Search
-Route::post('/admin/search/post', 		['as' => 'admin.player.search','uses' => 'Admin\AdminController@search']);
+Route::post('/admin/search/{post}', 		['as' => 'admin.player.search','uses' => 'Admin\AdminController@search']);
 Route::any('/admin/search', 			['as' => 'admin.search','uses' => 'Admin\AdminController@index']);
 
 // Admin Log
-Route::post('/admin/logs/search/post', 	['as' => 'admin.log.search','uses' => 'Admin\AdminController@searchAdminLogs']);
+Route::any('/admin/logs/search/results',['as' => 'admin.log.search','uses' => 'Admin\AdminController@searchAdminLogs']);
 Route::get('/admin/logs/search', 		['as' => 'admin.logs','uses' => 'Admin\AdminController@adminLogs']);
 
 // House Taxes
@@ -85,7 +87,6 @@ Route::group(array('prefix' => '/crowdfund'), function() {
 	Route::any('{id}/refund', 			['as' => 'crowdfund.refund', 'uses' => 'CrowdfundController@refund']);
 	Route::any('{id}', 					['as' => 'crowdfund.show', 'uses' => 'CrowdfundController@show']);
 });
-
 
 // Email tools
 Route::group(array('prefix' => '/email'), function() {

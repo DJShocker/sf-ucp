@@ -1,6 +1,6 @@
 @extends('layout/application')
 
-@section('content')    
+@section('content')
 <div class="container">
 	<div class="row">
 		<div class="col-md-3">
@@ -34,7 +34,7 @@
 					<div class="panel panel-grey">
 						<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$key->ID}}">
 							<div class="panel-heading">
-								<h4>{{$key->SUBJECT}}</h4>
+								<h4>{{$key->SUBJECT}} <small style="color: #eee">by {{{$key->author['NAME'] or 'Unknown'}}}</small></h4>
 								<div class="pull-right hidden-xs hidden-sm">{{Gliee\Irresistible\Utils::helpTopicColor($key->CATEGORY)}}</div>
 							</div>
 						</a>
@@ -42,12 +42,11 @@
 							<div class="panel-body">
 								{{$key->CONTENT}}
 
-								@if($key->USER_ID == $currentUser->ID OR $currentUser->ADMINLEVEL > 4)                       
+								@if($key->USER_ID == $currentUser->ID OR $currentUser->ADMINLEVEL > 4)
 								{{Form::open(array('url' => '/help/destroy', 'method' => 'POST'))}}
 									<input type="hidden" name="id" value="{{$key->ID}}" />
-									<input type="hidden" name="user_id" value="{{$key->USER_ID}}" />
 									<div align="center">
-										<input class="btn btn-sm btn-primary" value="Added By {{{$key->author['NAME'] or 'Unknown'}}}" disabled="disabled" />
+										<a class="btn btn-sm btn-primary" href="/help/{{$key->ID}}/edit">Edit Topic</a>
 										<input class="btn btn-sm btn-danger" type="Submit" value="Delete Topic"/>
 									</div>
 								{{Form::close()}}
