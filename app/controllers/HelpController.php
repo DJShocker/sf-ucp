@@ -25,7 +25,7 @@ class HelpController extends BaseController {
             return App::abort('404');
         }
 
-        $help = Help::orderBy('CATEGORY', 'asc')->get();
+        $help = Help::orderBy('CATEGORY', 'asc')->with('author')->get();
 
         if(!$help) {
             return App::abort('404');

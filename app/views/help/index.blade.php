@@ -34,7 +34,7 @@
 					<div class="panel panel-grey">
 						<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$key->ID}}">
 							<div class="panel-heading">
-								<h4>{{$key->SUBJECT}} <small style="color: #eee">by {{{$key->author['NAME'] or 'Unknown'}}}</small></h4>
+								<h4>{{$key->SUBJECT}} <small style="color: #eee">by {{{$key->author['NAME'] or 'Server'}}}</small></h4>
 								<div class="pull-right hidden-xs hidden-sm">{{Gliee\Irresistible\Utils::helpTopicColor($key->CATEGORY)}}</div>
 							</div>
 						</a>
