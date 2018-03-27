@@ -110,7 +110,7 @@ class HelpController extends BaseController {
                 return Redirect::route('help.edit', $topic->ID)->withErrors(["Please ensure that the character limit is less than 2048."])
                                                     ->withInput();
 
-            if ($user->ID != $getHelp->USER_ID && $user->ADMINLEVEL < 5)
+            if ($user->ID != $topic->USER_ID && $user->ADMINLEVEL < 5)
                 return Redirect::to( "/dashboard" )->withErrors(["You do not have permission to use this feature."]);
 
             $category  = trim(strip_tags(Input::get('category')));

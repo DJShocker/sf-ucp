@@ -29,7 +29,7 @@ class StatsController extends BaseController{
         $registeredUsers = \User::count();
         $bannedUsers = \DB::table('BANS')->count();
 
-        $totalCash = \User::select(\DB::raw('(SUM(`BANKMONEY`) + SUM(`CASH`)) as `TOTAL_CASH`'))->first()->TOTAL_CASH;
+        $totalCash = \Server::getTotalCash();
         $taxRate = \Server::taxrate()->first();
         $totalHouses = \DB::table('HOUSES')->count();
         $totalVehicles = \DB::table('VEHICLES')->count();

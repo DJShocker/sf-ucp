@@ -113,8 +113,8 @@
 								<p>{{ $package->DESCRIPTION }}</p>
 								<p>
 									@foreach ($patreons as $patreon)
-										@if ($patreon->TOTAL >= $package->REQUIRED_AMOUNT)
-											<span class="label {{ $currentUser->ID == $patreon->USER_ID ? 'label-primary' : 'label-default' }}">{{ $patreon->user->NAME }}</span>
+										@if ($patreon->TOTAL >= $package->REQUIRED_AMOUNT && $patreon->user)
+											<span class="label {{ $currentUser->ID == $patreon->USER_ID ? 'label-primary' : 'label-default' }}">{{{$patreon->user->NAME}}}</span>
 										@endif
 									@endforeach
 								</p>

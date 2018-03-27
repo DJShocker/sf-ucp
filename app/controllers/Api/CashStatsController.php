@@ -31,7 +31,7 @@ class CashStatsController extends \Controller {
             return \App::abort('403');
     	}
 
-        $totalCash = \User::select(\DB::raw('(SUM(`BANKMONEY`) + SUM(`CASH`)) as `TOTAL_CASH`'))->first();
+        $totalCash = \Server::getTotalCash();
 
         if(is_null($totalCash))
         	return \App::abort('500');
@@ -44,7 +44,7 @@ class CashStatsController extends \Controller {
         {
 	        $entry 			= new \Stats;
 	        $entry->NAME 	= 'totalcash';
-	        $entry->INT_VAL = $totalCash->TOTAL_CASH;
+	        $entry->INT_VAL = $totalCash;
 	 		$entry->save();
 
             \Session::put('inserted', time() + 60);

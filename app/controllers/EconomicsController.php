@@ -16,8 +16,9 @@ class EconomicsController extends BaseController{
         }
 
         // Server Variables
-        $totalCash = User::select(\DB::raw('(SUM(`BANKMONEY`) + SUM(`CASH`)) as `TOTAL_CASH`'))->first()->TOTAL_CASH;
+        $totalCash = Server::getTotalCash();
         $taxRate = Server::taxrate()->first();
+
 
         if(!$totalCash || !$taxRate) {
             return App::abort('404');
@@ -29,7 +30,7 @@ class EconomicsController extends BaseController{
 
         // Totals up historical costs of houses, vehicles and apartments atm.
         $userCapital = (
-        	DB::table('VEHICLES')->where('OWNER', '=', $currentUser->NAME)->sum('PRICE') + 
+        	DB::table('VEHICLES')->where('OWNER', '=', $currentUser->NAME)->sum('PRICE') +
         	DB::table('HOUSES')->where('OWNER', '=', $currentUser->NAME)->sum('COST') +
         	DB::table('APARTMENTS')->where('OWNER', '=', $currentUser->NAME)->count() * 5000000
      	);
