@@ -36,6 +36,9 @@ class EmailController extends BaseController {
 				'LAST_CHANGED' => time()
 			]);
 
+			// insert into mailchimp
+			self::mailchimpSubscribe($verification->EMAIL, $user->NAME);
+
 			// delete verification shit
 			DB::table('EMAIL_VERIFY')->where('ID', '=', $verification->ID)->delete();
 			return "Thanks {$user->NAME} for verifying your email ({$verification->EMAIL})!";
@@ -44,6 +47,29 @@ class EmailController extends BaseController {
 		{
 			return "An invalid verification id has been supplied for this user (maybe verified?)";
 		}
+	}
+
+	public function mailchimpSubscribe($email, $username)
+	{
+		$postData = [
+			'email_address' => $email,
+			'status' => 'subscribed',
+			'merge_fields' => [
+				'FNAME' => $username
+			]
+		];
+
+		$ch = curl_init('https://us12.api.mailchimp.com/3.0/lists/6c15de6a53/members/');
+
+		curl_setopt_array($ch, array(
+		    CURLOPT_POST => TRUE,
+		    CURLOPT_RETURNTRANSFER => TRUE,
+		    CURLOPT_HTTPHEADER => ['Authorization: apikey 83e4e8c473230da2abbb755074ae6d50-us12', 'Content-Type: application/json'],
+		    CURLOPT_POSTFIELDS => json_encode($postData)
+		));
+
+		curl_exec($ch);
+		curl_close($ch);
 	}
 
 }
