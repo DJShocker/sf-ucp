@@ -18,7 +18,7 @@
 		<li @if(Request::is('weapons')) class="active" @endif><a href="{{URL::route('weapons')}}"><i class="fa fa-bullseye"></i> <span>Weapon Statistics</span></a></li>
 		<li @if(Request::is('achievements')) class="active" @endif><a href="{{URL::route('achievements')}}"><i class="fa fa-flag"></i> <span>Achievements</span></a></li>
 
-		<li><a href="{{Config::get('irresistible.discord')}}" target="_blank"><i class="fa fa-comment"></i> <span>Discord</span></a></li>
+		<li><a href="{{URL::to('/discord')}}" target="_blank"><i class="fa fa-comment"></i> <span>Discord</span></a></li>
 		<li @if(Request::is('admins')) class="active" @endif><a href="{{URL::route('admins')}}"><i class="fa fa-legal"></i> <span>Admins</span></a></li>
 		<li><a href="http://forum.irresistiblegaming.com" target="_blank"><i class="fa fa-comments"></i> <span>Forums</span></a></li>
 
