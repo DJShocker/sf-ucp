@@ -17,6 +17,14 @@ class Server extends Eloquent{
     }
 
     /*
+     * Returns Discord Url
+    */
+    public function scopeDiscordurl($query)
+    {
+        return $query->where('NAME', '=', 'discordurl');
+    }
+
+    /*
      * Returns Director ID
     */
     public function scopeDirector($query)

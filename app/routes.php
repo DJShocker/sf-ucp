@@ -96,7 +96,8 @@ Route::group(array('prefix' => '/email'), function() {
 
 // Discord redirect
 Route::get('discord', function () {
-	return Redirect::to(Config::get('irresistible.discord'));
+	$serverVariables = Server::discordurl()->first();
+	return Redirect::to($serverVariables->STRING_VAL);
 });
 
 // API
