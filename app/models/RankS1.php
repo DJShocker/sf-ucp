@@ -2,7 +2,7 @@
 
 class RankS1 extends Eloquent{
 
-    protected $table = 'RANKS_S4';
+    protected $table = 'RANKS_PREVIOUS';
 
     protected $timestamp = false;
 
@@ -11,20 +11,6 @@ class RankS1 extends Eloquent{
     public $timestamps = false;
 
     private static $oldRankData = [
-        [ 5497.0, "Elite V" ],
-        [ 3435.0, "Elite IV" ],
-        [ 2147.0, "Elite III" ],
-        [ 1342.0, "Elite II" ],
-        [ 838.0, "Elite I" ],
-        [ 524.0, "Silver V" ],
-        [ 328.0, "Silver IV" ],
-        [ 205.0, "Silver III" ],
-        [ 128.0, "Silver II" ],
-        [ 50.0, "Silver I" ],
-        [ 0.0, "unranked" ]
-    ];
-
-    private static $rankData = [
         [ 9497.20, "Elite V" ],
         [ 5301.70, "Elite IV" ],
         [ 2959.61, "Elite III" ],
@@ -35,6 +21,20 @@ class RankS1 extends Eloquent{
         [ 160.45, "Silver III" ],
         [ 89.56, "Silver II" ],
         [ 50.0, "Silver I" ],
+        [ 0.0, "unranked" ]
+    ];
+
+    private static $rankData = [
+        [ 11871.5, "Elite V" ],
+        [ 6627.13, "Elite IV" ],
+        [ 3699.51, "Elite III" ],
+        [ 2065.21, "Elite II" ],
+        [ 1152.88, "Elite I" ],
+        [ 643.581, "Silver V" ],
+        [ 359.271, "Silver IV" ],
+        [ 200.563, "Silver III" ],
+        [ 111.95, "Silver II" ],
+        [ 62.5, "Silver I" ],
         [ 0.0, "unranked" ]
     ];
 
