@@ -12,7 +12,7 @@ class SignatureController extends BaseController {
             return Response::make('This user could not be found.', 404);
         }
 
-        $info = !is_numeric($id) ? User::where('NAME', '=', trim(strtolower(strip_tags($id))))->first() : User::find($id);
+        $info = !is_numeric($id) ? User::where('NAME', '=', trim(strtolower(strip_tags($id))))->with('gang')->first() : User::find($id);
 
         if($info == null){
             return Response::make('This user could not be found.', 404);
@@ -72,6 +72,16 @@ class SignatureController extends BaseController {
 
         imagettftext($image, 10, 0, 401, 97, $text, $font, $info->ROBBERIES);
         imagettftext($image, 10, 0, 381, 114, $text, $font, $info->ARRESTS);
+
+        if (!is_null($info->gang)) {
+            $gang = $info->gang->NAME;
+            $gang_color = $info->gang->COLOR;
+            $text = imagecolorallocate($image, ($gang_color >> 24) & 0x000000FF, ($gang_color >> 16) & 0x000000FF,  ($gang_color >> 8) & 0x000000FF);
+        } else {
+            $gang = "None";
+        }
+
+        imagettftext($image, 7, 0, 369, 130, $text, $font, $gang);
 
         imagecopyresampled($backg, $image, 0, 0, 0,  0, 500, 150, 500, 150);
 
