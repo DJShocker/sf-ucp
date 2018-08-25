@@ -7,8 +7,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{Config::get('irresistible.title')}} {{isset($pageheadTitle) ? ('- ' . ucfirst($pageheadTitle)) : ('')}}</title>
-    <meta name="description" content="Irresistible Gaming User Control Panel">
+    <meta name="description" content="San Fierro Cops And Robbers User Control Panel">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="Shortcut Icon" href="{{URL::to('/')}}/favicon.ico" type="image/x-icon" />
 
     <!-- Core -->
     <link href="{{URL::to('/')}}/assets/css/styles.css" rel='stylesheet' type='text/css'>
@@ -22,7 +23,7 @@
     <![endif]-->
 
     <!-- Plugins -->
-    <link rel='stylesheet' type='text/css' href='{{URL::to('/')}}/assets/plugins/form-toggle/toggles.css' /> 
+    <link rel='stylesheet' type='text/css' href='{{URL::to('/')}}/assets/plugins/form-toggle/toggles.css' />
 
   </head>
   <body class="static-header">

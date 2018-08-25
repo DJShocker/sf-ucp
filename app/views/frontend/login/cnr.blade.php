@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta name="description" content="San Fierro Cops And Robbers User Control Panel">
+    <link rel="Shortcut Icon" href="{{URL::to('/')}}/favicon.ico" type="image/x-icon" />
+
     <link href='http://fonts.googleapis.com/css?family=Montserrat|Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{URL::asset('assets/css/styles.css')}}">
   </head>
