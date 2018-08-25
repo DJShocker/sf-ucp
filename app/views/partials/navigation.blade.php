@@ -1,6 +1,6 @@
 <header class="navbar navbar-inverse navbar-static-top" role="banner">
   <a id="leftmenu-trigger" class="tooltips" title="" data-placement="right" data-toggle="tooltip" data-original-title="Toggle Sidebar"></a>
-    
+
   <ul class="nav navbar-nav pull-right toolbar">
     <li class="dropdown">
       <a id="rightmenu-trigger" href="#" class="dropdown-toggle" data-toggle="dropdown"></a>
@@ -12,8 +12,8 @@
         </li>
         <li class="userlinks">
           <ul class="dropdown-menu">
-            <li><a href="http://forum.irresistiblegaming.com" target="_blank">Main Site <i class="pull-right fa fa-group"></i></a></li>
-            <li><a href="http://donate.irresistiblegaming.com" target="_blank">Donate <i class="pull-right fa fa-money"></i></a></li>
+            <li><a href="//forum.sfcnr.com" target="_blank">Forums <i class="pull-right fa fa-comments"></i></a></li>
+            <li><a href="//donate.sfcnr.com" target="_blank">Donate <i class="pull-right fa fa-money"></i></a></li>
             <li><a href="{{URL::to('/help')}}">Help Centre <i class="pull-right fa fa-question-circle"></i></a></li>
             <li class="divider"></li>
             <li><a href="{{URL::to('/auth/destroy')}}" class="text-right">Sign Out</a></li>

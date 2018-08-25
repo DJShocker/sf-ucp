@@ -11,7 +11,7 @@ return array(
 	| Template: Major.Minor.Patches
 	|
 	*/
-	'version' 	=>	'v4.5.0',
+	'version' 	=>	'v4.6.0',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return array(
 	| User Control Panel. Contains mainly IP addresses prone to change.
 	|
 	*/
-	'gaming'	=> 	'svr.irresistiblegaming.com',
+	'gaming'	=> 	'svr.sfcnr.com',
 	'discord' 	=>	'https://discord.gg/vfXcwc',
 
 );

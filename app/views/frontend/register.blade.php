@@ -18,7 +18,7 @@
           </h4>
 
           <div class="text-center">
-            <h3><a href="samp://svr.irresistiblegaming.com:7777">svr.irresistiblegaming.com:7777</a></h3>
+            <h3><a href="samp://{{ Config::get('irresistible.gaming') }}:7777">{{ Config::get('irresistible.gaming') }}:7777</a></h3>
 
             <p style="padding-top: 14px">The user control panel can only be accessed by users registered within our SA-MP server.</p>
             <p style="padding-top: 14px">{{ $serverPlayers }} players are currently online at the moment.</p>
@@ -26,7 +26,7 @@
           </div>
           <!-- End of login form -->
         </div>
-        <div class="panel-footer"> 
+        <div class="panel-footer">
           <div class="text-center">&copy; IrresistibleGaming, 2011.</div>
         </div>
       </div>

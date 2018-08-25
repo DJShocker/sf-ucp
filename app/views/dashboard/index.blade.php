@@ -37,7 +37,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 col-xs-12 col-sm-6">
-                    <a class="info-tiles tiles-toyo" href="samp://svr.irresistiblegaming.com:7777">
+                    <a class="info-tiles tiles-toyo" href="samp://svr.sfcnr.com:7777">
                         <div class="tiles-heading">Server Status</div>
                         <div class="tiles-body-alt">
                             <i class="fa fa-group"></i>
@@ -48,7 +48,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 col-xs-12 col-sm-6">
-                    <a class="info-tiles tiles-orange" href="http://donate.irresistiblegaming.com">
+                    <a class="info-tiles tiles-orange" href="http://donate.sfcnr.com">
                         <div class="tiles-heading">VIP Status</div>
                         <div class="tiles-body-alt">
                             <i class="fa fa-star"></i>
@@ -92,7 +92,7 @@
                             </tr>
                             <tr>
                                 <td>Total Irresistible Coins</td>
-                                <td>{{$currentUser->COINS}} <a href="//donate.irresistiblegaming.com"><span class="label label-primary pull-right">Get more!</span></a></td>
+                                <td>{{$currentUser->COINS}} <a href="//donate.sfcnr.com"><span class="label label-primary pull-right">Get more!</span></a></td>
                             <tr>
                                 <td>Time Online</td>
                                 <td>{{$timeOnline}}</td>
@@ -140,7 +140,7 @@
                                 <td>VIP Job</td>
                                 <td>
                                     @if ($currentUser->VIP_PACKAGE <= 0)
-                                        <a href="//donate.irresistiblegaming.com">You are not a VIP, become one today!</a>
+                                        <a href="//donate.sfcnr.com">You are not a VIP, become one today!</a>
                                     @else
                                         {{Gliee\Irresistible\Utils::skillToString($currentUser->VIP_JOB)}}</td>
                                     @endif

@@ -51,7 +51,17 @@
 
         </div>
         <div class="panel-footer">
-          <div class="text-center">&copy; IrresistibleGaming, 2011.</div>
+          <div class="row">
+            <div class="col-xs-6">
+              <a href="{{ URL::to('//forum.sfcnr.com') }}" target="_blank" class="btn btn-block btn-default btn-sm"><i class="fa fa-group" style="font-size: 10px"></i> Forums</a>
+            </div>
+            <div class="col-xs-6">
+              <a href="{{ URL::to('//donate.sfcnr.com') }}" target="_blank" class="btn btn-block btn-warning btn-sm"><i class="fa fa-dollar" style="font-size: 10px"></i> Donate</a>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="text-center">&copy; SF-CNR, {{ date('Y') }}.</div>
         </div>
       </div>
     </div>
