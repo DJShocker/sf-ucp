@@ -16,46 +16,54 @@
 	                        <th>Last Promotion/Demotion</th>
 	                    </tr>
 	                </thead>
-	                <tbody>						
-						<tr>
-							<td>Lorenc</td>
-							<td><font color="#FF6200"><strong>Developer</strong></font></td>
-							<td>n/a</td>
-							<td>n/a</td>
-							<td></td>
-						</tr>
+	                <tbody>
+	                	@foreach ($developerList as $developer)
+							<tr>
+								<td>{{ $developer->NAME }}</td>
+								<td><font color="#FF6200" title='Level {{ $developer->ADMINLEVEL }}'><strong>Developer</strong></font></td>
+								<td>n/a</td>
+								<td>n/a</td>
+								<td></td>
+							</tr>
+						@endforeach
 
-						<tr>
-							<td>XFlawless</td>
-							<td><font color="#FF6200"><strong>Developer</strong></font></td>
-							<td>n/a</td>
-							<td>n/a</td>
-							<td></td>
-						</tr>
+	                	@foreach ($supporterList as $supporter)
+							<tr>
+								<td>{{ $supporter->NAME }}</td>
+								<td><font color="#1E661E" title='Level {{ $supporter->ADMINLEVEL }}'><strong>Supporter</strong></font></td>
+								<td>n/a</td>
+								<td>n/a</td>
+								<td></td>
+							</tr>
+						@endforeach
 
 						@foreach($adminList as $user)
-							@if($user->NAME != "XFlawless" && $user->NAME != "Lorenc")
-								<tr>
-									<td>{{ucfirst($user->NAME)}}</td>
-		                        	<td>{{Gliee\Irresistible\Utils::adminlevelToString($user->ADMINLEVEL)}}</td>
-		                        	<td>{{Carbon\Carbon::createFromTimeStamp($user->LASTLOGGED)->diffForHumans()}}</td>
-		                        	<td>{{Gliee\Irresistible\Utils::secondstohuman($user->UPTIME - $user->WEEKEND_UPTIME)}}</td>
-									<td>
-										@if ($user->adminlog->isEmpty() == false)
-											<?php
-												$carbonDate = new Carbon\Carbon($user->adminlog[0]->DATE);
-												$color = "green";
+							<tr>
+								<td>{{ucfirst($user->NAME)}}</td>
+	                        	<td>{{Gliee\Irresistible\Utils::adminlevelToString($user->ADMINLEVEL)}}</td>
+	                        	<td>{{Carbon\Carbon::createFromTimeStamp($user->LASTLOGGED)->diffForHumans()}}</td>
+	                        	<td>{{Gliee\Irresistible\Utils::secondstohuman($user->UPTIME - $user->WEEKEND_UPTIME)}}</td>
+								<td>
+									@if ($user->adminlog->isEmpty() == false)
+										<?php
+											$carbonDate = new Carbon\Carbon($user->adminlog[0]->DATE);
+											$color = "green";
 
-												if (isset($user->adminlog[1]) && is_null($user->adminlog[1]) == false && $user->adminlog[1]->LEVEL > $user->adminlog[0]->LEVEL) {
-													$color = "red";
-												}
+											if (isset($user->adminlog[1]) && is_null($user->adminlog[1]) == false && $user->adminlog[1]->LEVEL > $user->adminlog[0]->LEVEL) {
+												$color = "red";
+											}
+											echo "<font style='color: {$color}'>{$carbonDate->diffForHumans(null, true)}</font>";
 
-												echo "<font style='color: {$color}'>{$carbonDate->diffForHumans(null, true)}</font>";
-											?>
-										@endif
-									</td>
-								</tr>
-							@endif
+											if ($user->UPTIME - $user->WEEKEND_UPTIME < 25200) {
+												echo "<i class='fa fa-eye-slash pull-right' style='margin: 3px' title='Under 7 hours!'></i>";
+											} else if ($carbonDate->diffInDays() >= 7 && $user->ADMINLEVEL < 4) {
+												echo "<i class='fa fa-check pull-right' style='margin: 3px' title='Capable of promotion'></i>";
+											}
+
+										?>
+									@endif
+								</td>
+							</tr>
 						@endforeach
 	                </tbody>
 	            </table>

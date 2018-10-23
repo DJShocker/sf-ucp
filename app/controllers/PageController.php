@@ -27,18 +27,23 @@ class PageController extends BaseController{
     public function admins()
     {
         $currentUser = User::find(Session::get('UUID'));
-        $adminList = User::where('ADMINLEVEL', '>', '0')->orderBy('ADMINLEVEL', 'desc')->with('adminlog')->take(50)->get(); //->remember(10)
 
-        if(!$currentUser || !$adminList) {
+        if(!$currentUser) {
             return App::abort('404');
         }
+
+        $developers = [1, 758617, 731064];
+        $supporters = [814850];
+
+        $developerList = User::select('NAME', 'ADMINLEVEL')->whereIn('ID', $developers)->orderBy('ADMINLEVEL', 'DESC')->orderBy('ID', 'ASC')->get();
+        $adminList =  User::where('ADMINLEVEL', '>', '0')->whereNotIn('ID', array_merge($developers, $supporters))->orderBy('ADMINLEVEL', 'desc')->with('adminlog')->take(50)->get();
+        $supporterList = User::select('NAME', 'ADMINLEVEL')->whereIn('ID', $supporters)->orderBy('ADMINLEVEL', 'DESC')->orderBy('ID', 'ASC')->get();
 
         $averageUptime = ceil(User::where('ADMINLEVEL', '>', '0')->avg(DB::raw('UPTIME - WEEKEND_UPTIME')));
 
         return Response::make(
             View::make('admin.list')
-                ->with('currentUser',       $currentUser)
-                ->with('adminList',         $adminList)
+                ->with(compact('currentUser', 'adminList', 'developerList', 'supporterList'))
                 ->with('totalAdmins',       $adminList->count())
                 ->with('averageUptime',     $averageUptime)
                 ->with('breadCrumb',        ['Dashboard', 'Admin List'])

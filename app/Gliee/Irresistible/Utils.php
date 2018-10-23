@@ -22,12 +22,12 @@ class Utils
 	{
 		switch($rank)
 		{
-			case 6:	$string = '<font color="#800000"><strong>Executive Administrator</strong></font>';	break;
-			case 5:	$string = '<font color="#FF0000"><strong>Head Administrator</strong></font>';		break;
-			case 4: $string = '<font color="#FF0099"><strong>Lead Administrator</strong></font>';		break;
-			case 3:	$string = '<font color="#3333FF"><strong>Senior Administrator</strong></font>';		break;
-			case 2:	$string = '<font color="#9900FF"><strong>General Administrator</strong></font>';	break;
-			case 1:	$string = '<font color="#C26100"><strong>Trial Administrator</strong></font>';		break;
+			case 6:	$string = "<font color='#800000' title='Level {$rank}'><strong>Executive Administrator</strong></font>";	break;
+			case 5:	$string = "<font color='#FF0000' title='Level {$rank}'><strong>Head Administrator</strong></font>";			break;
+			case 4: $string = "<font color='#FF0099' title='Level {$rank}'><strong>Lead Administrator</strong></font>";			break;
+			case 3:	$string = "<font color='#3333FF' title='Level {$rank}'><strong>Senior Administrator</strong></font>";		break;
+			case 2:	$string = "<font color='#9900FF' title='Level {$rank}'><strong>General Administrator</strong></font>";		break;
+			case 1:	$string = "<font color='#C26100' title='Level {$rank}'><strong>Trial Administrator</strong></font>";		break;
 			default: $string = 'None';
 		}
 		return $string;
