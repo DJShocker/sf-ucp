@@ -23,6 +23,9 @@ Route::any('/dashboard', 				['as' => 'dashboard', 	'uses' => 'DashboardControll
 // Economics
 Route::any('/economics', 				['as' => 'economics', 	'uses' => 'EconomicsController@index']);
 
+// Stocks
+Route::any('/stocks', 					['as' => 'stocks', 	'uses' => 'StocksController@index']);
+
 // Signatures
 Route::get('/sig/{id}', 				'SignatureController@index');
 
@@ -107,6 +110,9 @@ Route::api(['version' => 'v1', 'prefix' => 'api'], function()
 	Route::any('/cashstats', 			'API\CashStatsController@totalcash');
 	Route::any('/cashstats/add/{key}',	'API\CashStatsController@create');
 	Route::get('/donor/reset/{key}',	'API\CashStatsController@donorReset');
+
+	// Stock Data
+	Route::get('/stock/{key}',			'API\StockDataController@stock');
 
 	// Transactions
 	Route::get('/transactions', 		'API\TransactionsController@transactions');

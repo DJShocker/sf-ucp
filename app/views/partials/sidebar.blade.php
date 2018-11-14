@@ -1,8 +1,9 @@
 <nav id="page-leftbar" role="navigation">
 	<ul style="" class="acc-menu" id="sidebar">
 		<li @if(Request::is('dashboard')) class="active" @endif><a href="{{URL::route('dashboard')}}"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
-		<li @if(Request::is('crowdfund/*')) class="active" @endif><a href="{{URL::route('crowdfund.index')}}"><i class="fa fa-heart"></i> <span>Feature Crowdfunding <span class="label label-info" style="margin-left: 1em">BETA</span></span></a></li>
+		<li @if(Request::is('crowdfund/*')) class="active" @endif><a href="{{URL::route('crowdfund.index')}}"><i class="fa fa-heart"></i> <span>Feature Crowdfunding</span></a></li>
         <li @if(Request::is('economics')) class="active" @endif><a href="{{URL::route('economics')}}"><i class="fa fa-money"></i> <span>Economics</span></a></li>
+        <li @if(Request::is('stocks')) class="active" @endif><a href="{{URL::route('stocks')}}"><i class="fa fa-bar-chart-o"></i> <span>Stocks</span></a></li>
 		<li @if(Request::is('help')) class="active" @endif><a href="{{URL::route('help')}}"><i class="fa fa-info-circle"></i> <span>Help Centre</span></a></li>
 		<li @if(Request::is('highscores')) class="active" @endif><a href="{{URL::route('highscores')}}"><i class="fa fa-trophy"></i> <span>Highscores</span></a></li>
 		<li @if(Request::is('seasonal')) class="active" @endif><a href="{{URL::route('seasonal')}}"><i class="fa fa-leaf"></i> <span>Seasonal</span></a></li>
