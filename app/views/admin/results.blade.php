@@ -49,7 +49,6 @@
 	                        <th>Score</th>
 	                        <th>On-Hand Money</th>
 	                        <th>Bank Money</th>
-	                        <th>XP</th>
 	                        <th>Current Bounty</th>
 	                        <th>Admin level</th>
 					    </tr>
@@ -64,7 +63,6 @@
 		                    <td>{{$user->SCORE}}</td>
 		                    <td>{{$user->CASH}}</td>
 		                    <td>{{$user->BANKMONEY}}</td>
-		                    <td>{{$user->xp()}}</td>
 		                    <td>{{$user->BOUNTY}}</td>
 		                    <td>{{$user->ADMINLEVEL}}</td>
 		                </tr>
