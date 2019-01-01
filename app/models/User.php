@@ -29,4 +29,8 @@ class User extends Eloquent{
     public function gang() {
         return $this->belongsTo('Gang', 'GANG_ID', 'ID');
     }
+
+    public function xp() {
+        return DB::table('USER_LEVELS')->where('USER_ID', $this->ID)->sum('EXPERIENCE');
+    }
 }

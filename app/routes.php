@@ -67,9 +67,6 @@ Route::any('/admin/search', 			['as' => 'admin.search','uses' => 'Admin\AdminCon
 Route::any('/admin/logs/search/results',['as' => 'admin.log.search','uses' => 'Admin\AdminController@searchAdminLogs']);
 Route::get('/admin/logs/search', 		['as' => 'admin.logs','uses' => 'Admin\AdminController@adminLogs']);
 
-// House Taxes
-Route::any('/admin/taxes/mapping', 		['as' => 'admin.taxes','uses' => 'Admin\StatsController@mappingTaxes']);
-
 // Admin - Player Manage
 Route::any('/admin/manage', 			['as' => 'admin.manage','uses' => 'Admin\PlayerController@index']);
 Route::post('/admin/manage/ban', 		['as' => 'ban', 		'uses' => 'Admin\PlayerController@ban']);

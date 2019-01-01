@@ -55,7 +55,6 @@
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=score">Score</a></th>
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=cash">On-Hand Money</a></th>
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=bankmoney">Bank Money</a></th>
-	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=xp">XP</a></th>
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=bounty">Current Bounty</a></th>
 	                        <th><a href="{{Request::url()}}?page={{$users->getCurrentPage()}}&amp;sort={{$sort}}&amp;field=adminlevel">Admin level</a></th>
 					    </tr>
@@ -70,7 +69,6 @@
 		                    <td>{{$user->SCORE}}</td>
 		                    <td>{{$user->CASH}}</td>
 		                    <td>{{$user->BANKMONEY}}</td>
-		                    <td>{{$user->XP}}</td>
 		                    <td>{{$user->BOUNTY}}</td>
 		                    <td>{{$user->ADMINLEVEL}}</td>
 		                </tr>

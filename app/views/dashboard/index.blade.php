@@ -151,7 +151,7 @@
                             </tr>
                             <tr>
                                 <td>XP</td>
-                                <td>{{number_format($currentUser->XP)}}</td>
+                                <td>{{number_format($currentUser->xp())}}</td>
                             </tr>
                             <tr>
                                 <td>Cash On-Hand</td>

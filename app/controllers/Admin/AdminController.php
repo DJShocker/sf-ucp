@@ -79,9 +79,6 @@ class AdminController extends BaseController{
             case "bankmoney":
                 $field .= "BANKMONEY";
                 break;
-            case "xp":
-                $field .= "XP";
-                break;
             case "adminlevel":
                 $field .= "ADMINLEVEL";
                 break;

@@ -23,7 +23,7 @@
 
 				    <tbody>
 		           	@foreach ($users as $user)
-		                <tr>		            
+		                <tr>
 	                        <td>{{ucfirst($user->NAME)}}</td>
 	                        <td>{{$user->IP}}</td>
 	                        <td>{{$user->REASON}}</td>
@@ -64,7 +64,7 @@
 		                    <td>{{$user->SCORE}}</td>
 		                    <td>{{$user->CASH}}</td>
 		                    <td>{{$user->BANKMONEY}}</td>
-		                    <td>{{$user->XP}}</td>
+		                    <td>{{$user->xp()}}</td>
 		                    <td>{{$user->BOUNTY}}</td>
 		                    <td>{{$user->ADMINLEVEL}}</td>
 		                </tr>

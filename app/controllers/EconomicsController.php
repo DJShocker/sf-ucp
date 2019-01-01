@@ -39,10 +39,16 @@ class EconomicsController extends BaseController{
         $percentageRows = Stats::where('NAME', '=', 'totalcash')->select('INT_VAL as cash', 'CREATED_AT', 'NAME')
 	 								   							->orderBy('CREATED_AT', 'desc')->limit(1)->get(); // Get two most recent
 
-        $difference = $totalCash - $percentageRows[0]->cash;
-
-
-		$percentage = ($percentageRows[0]->cash < $totalCash ? '+' : '') . sprintf("%.1f", ($difference / $totalCash) * 100);
+        if (count($percentageRows))
+        {
+            $difference = $totalCash - $percentageRows[0]->cash;
+            $percentage = ($percentageRows[0]->cash < $totalCash ? '+' : '') . sprintf("%.1f", ($difference / $totalCash) * 100);
+        }
+        else
+        {
+            $difference = 0;
+            $percentage = 0;
+        }
 
       	return Response::make(
             View::make('economics.index')
