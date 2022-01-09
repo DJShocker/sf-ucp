@@ -7,7 +7,5 @@ RUN apt-get update && apt-get install -y git libmcrypt-dev zip unzip \
     && docker-php-ext-enable imagick \
     && docker-php-ext-install mcrypt pdo_mysql pcntl gd
 
-RUN docker-php-ext-install php-mysql
-
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
