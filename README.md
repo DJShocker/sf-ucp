@@ -39,7 +39,7 @@ This project has been dockerized for convienience. Make sure your server/system 
 1. Clone the project
 2. `cp .env.example.php .env.php`
 3. Edit `.env.php` and make sure the database point to your SF-CNR database
-4. `docker compose -p sf-ucp up -d --build`
+4. `docker-compose -p sf-ucp up -d --build`
 	* By default, the port used will be 80. Modifiable in the docker-compose (see nginx, ports section - 80:80 is default, but 8080:80 will use port 8080 instead).
 5. `docker exec app composer install`
 6. Access the site `http://localhost`
