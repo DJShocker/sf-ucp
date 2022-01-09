@@ -2,14 +2,14 @@ version: '3'
 services:
 
   # UCP code
-  ucp:
+  app:
     build:
       context: ./
       dockerfile: ./docker/ucp/Dockerfile
     volumes:
       - ./:/var/www
     working_dir: /var/www
-    container_name: sf-ucp_app
+    container_name: app
 
   # Nginx for the webserver
   nginx:
@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     working_dir: /var/www
     volumes_from:
-      - ucp
+      - app
     ports:
       - 80:80
-    container_name: sf-ucp_nginx
+    container_name: nginx
