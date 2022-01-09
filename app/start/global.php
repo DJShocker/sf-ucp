@@ -31,7 +31,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/ucp.log');
+Log::useFiles(storage_path().'/logs/laravel.log');
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +50,7 @@ App::error(function(Exception $exception, $code)
 {
     if(Config::get('irresistible.debug'))
         Log::error($exception);
-    
+
     if(!Config::get('app.debug'))
     {
         switch ($code)
