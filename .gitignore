@@ -4,7 +4,6 @@
 /app/storage/cache
 /app/storage/views
 composer.phar
-composer.lock
 .env.*.php
 .env.php
 .DS_Store
@@ -13,3 +12,5 @@ Thumbs.db
 /public/uploads
 /resources
 prod.env.php
+!/app/storage/sessions/.gitkeep
+!.env.example.php
