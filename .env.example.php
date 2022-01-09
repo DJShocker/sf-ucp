@@ -9,9 +9,9 @@ return [
     'DEBUG' => 1,
 
     // Database
-    'DB_PORT' => '3306',
-    'DB_HOST' => '127.0.0.1',
-    'DB_DATABASE' => 'database',
-    'DB_USER' => 'username',
-    'DB_PASSWORD' => 'password',
+    'DATABASE_PORT' => '3306',
+    'DATABASE_HOST' => '127.0.0.1',
+    'DATABASE_NAME' => 'database',
+    'DATABASE_USERNAME' => 'username',
+    'DATABASE_PASSWORD' => 'password',
 ];
