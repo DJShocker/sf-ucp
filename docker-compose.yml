@@ -20,5 +20,5 @@ services:
     volumes_from:
       - ucp
     ports:
-      - 8080:80
+      - 80:80
     container_name: sf-ucp_nginx
